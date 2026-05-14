@@ -32,6 +32,13 @@ class ColeccionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val libros = (activity as MainActivity).miViewModel.listaLibros()
+        var lista = ""
+        for (libro in libros) {
+            lista = lista + libro.titulo + " - " + libro.autor + "\n"
+        }
+        binding.tvListaTexto.text = lista
+
 //        binding.buttonFirst.setOnClickListener {
 //            findNavController().navigate(R.id.action_ColeccionFragment_to_SecondFragment)
 //        }

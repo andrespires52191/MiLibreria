@@ -13,12 +13,20 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import com.example.milibreria.databinding.ActivityMainBinding
+import com.example.milibreria.modelo.VM
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    // Cuando esté funcionando debería parecerse a esto:
+    //val miDataBase by lazy { BBDD.getDatabase(this)}
+    //val miRepositorio by lazy { Repositorio(miDataBase.miDAO()) }
+    //val miViewModel:VM by viewModels { ConcesionarioViewModelFactory(miRepositorio) }
+    val miViewModel: VM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
