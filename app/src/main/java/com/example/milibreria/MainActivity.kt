@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        // Se puede borrar:
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
@@ -58,8 +59,17 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+        // (menu/menu_main.xml)
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.saltar_a_coleccion -> {
+                // TODO: Quitar este menu temporal
+                val navController = findNavController(R.id.nav_host_fragment_content_main)
+                // (navigation/nav_graph.xml)
+                navController.navigate(R.id.action_FirstFragment_to_coleccionFragment)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

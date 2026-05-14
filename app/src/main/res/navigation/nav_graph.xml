@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_coleccionFragment"
+            app:destination="@id/coleccionFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -25,4 +28,9 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/coleccionFragment"
+        android:name="com.example.milibreria.ColeccionFragment"
+        android:label="fragment_coleccion"
+        tools:layout="@layout/fragment_coleccion" />
 </navigation>
