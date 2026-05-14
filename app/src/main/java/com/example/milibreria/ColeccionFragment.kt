@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.milibreria.adaptador.AdaptadorLibros
 import com.example.milibreria.databinding.FragmentColeccionBinding
 
 /**
@@ -33,15 +34,9 @@ class ColeccionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val libros = (activity as MainActivity).miViewModel.listaLibros()
-        var lista = ""
-        for (libro in libros) {
-            lista = lista + libro.titulo + " - " + libro.autor + "\n"
-        }
-        binding.tvListaTexto.text = lista
 
-//        binding.buttonFirst.setOnClickListener {
-//            findNavController().navigate(R.id.action_ColeccionFragment_to_SecondFragment)
-//        }
+        binding.cfrvColeccion.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+        binding.cfrvColeccion.adapter = AdaptadorLibros(libros)
     }
 
     override fun onDestroyView() {
