@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".AnadirLibroFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="32dp">
+
+        <TextView
+            android:id="@+id/tvLabelTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Título:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etDetalleTitulo"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_border"
+            android:hint="Escribe el título aquí"
+            android:inputType="textCapSentences"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelTitulo" />
+
+        <TextView
+            android:id="@+id/tvLabelAutor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Autor:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etDetalleTitulo" />
+
+        <EditText
+            android:id="@+id/etDetalleAutor"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_border"
+            android:hint="Escribe el autor / la autora aquí"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelAutor" />
+
+        <TextView
+            android:id="@+id/tvLabelIsbn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="ISBN:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etDetalleAutor" />
+
+        <EditText
+            android:id="@+id/etDetalleIsbn"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_border"
+            android:hint="Escribe el ISBN aquí"
+            android:inputType="text"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelIsbn" />
+
+        <TextView
+            android:id="@+id/tvLabelPublicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Año de publicación:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etDetalleIsbn" />
+
+        <EditText
+            android:id="@+id/etDetallePublicacion"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/bg_input_border"
+            android:focusable="false"
+            android:hint="Escribe el año de publicación aquí"
+            android:inputType="none"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toStartOf="@id/btnCalendario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelPublicacion" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnCalendario"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="#008566"
+            android:contentDescription="Seleccionar fecha"
+            android:src="@android:drawable/ic_menu_my_calendar"
+            android:tint="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@id/etDetallePublicacion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/etDetallePublicacion" />
+
+        <TextView
+            android:id="@+id/tvLabelValoracion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Valoración:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etDetallePublicacion" />
+
+        <EditText
+            android:id="@+id/etDetalleValoracion"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_border"
+            android:hint="Teclea la valoración aquí"
+            android:inputType="numberDecimal"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelValoracion" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelar"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:text="Cancelar"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:backgroundTint="#94D1BE"
+            app:cornerRadius="28dp"
+            app:layout_constraintEnd_toStartOf="@id/btnGuardar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etDetalleValoracion" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardar"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:text="Guardar"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:backgroundTint="#008566"
+            app:cornerRadius="28dp"
+            app:layout_constraintBottom_toBottomOf="@id/btnCancelar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnCancelar"
+            app:layout_constraintTop_toTopOf="@id/btnCancelar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

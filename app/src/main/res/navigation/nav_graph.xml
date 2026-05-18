@@ -32,5 +32,15 @@
         android:id="@+id/coleccionFragment"
         android:name="com.example.milibreria.ColeccionFragment"
         android:label="fragment_coleccion"
-        tools:layout="@layout/fragment_coleccion" />
+        tools:layout="@layout/fragment_coleccion">
+
+        <action
+            android:id="@+id/action_coleccionFragment_to_anadirLibroFragment"
+            app:destination="@id/anadirLibroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/anadirLibroFragment"
+        android:name="com.example.milibreria.AnadirLibroFragment"
+        android:label="Añadir Libro"
+        tools:layout="@layout/fragment_anadir_libro" />
 </navigation>

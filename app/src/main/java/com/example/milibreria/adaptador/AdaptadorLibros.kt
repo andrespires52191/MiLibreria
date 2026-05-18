@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.milibreria.modelo.Libro
 import com.example.milibreria.databinding.ItemLibroBinding
+import com.example.milibreria.R
 
 //El adapatdor administra los contenedores
 class AdaptadorLibros(val lista: MutableList<Libro>) :
@@ -20,6 +21,7 @@ class AdaptadorLibros(val lista: MutableList<Libro>) :
 
     //cargamos los datos en cada una de las instancias del ViewHolder
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // Hay que pasar la posición para que el adaptador sepa exactamente qué índice está pulsando el usuario y mostrar los datos del libro seleccionado
         holder.posicion = position
         holder.binding.iltvTitulo.text = lista[position].titulo
         holder.binding.iltvAutor.text = lista[position].autor
@@ -36,9 +38,14 @@ class AdaptadorLibros(val lista: MutableList<Libro>) :
 
         init {
             binding.root.setOnClickListener {
-//                val miBundle = bundleOf("posicion" to posicion)
-//                binding.rviClPrincipal.findNavController()
-//                    .navigate(R.id.action_thirdFragment_to_fourthFragment, miBundle)
+                // Creamos el paquete con los datos (la posición del elemento clicado)
+                val miBundle = bundleOf("posicion" to posicion)
+
+                // Navegamos al fragmento de detalle usando el ID de la acción del nav_graph
+                binding.root.findNavController().navigate(
+                    R.id.action_coleccionFragment_to_anadirLibroFragment,
+                    miBundle
+                )
             }
         }
     }
