@@ -7,6 +7,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <!--  AnadirLibroFragment  -->
     <string name="titulo">Título:</string>
     <string name="titulo_hint">Escribe el título aquí</string>
     <string name="autor">Autor/a:</string>
@@ -21,6 +22,14 @@
     <string name="valoracion_hint">Teclea la valoración aquí</string>
     <string name="cancelar">Cancelar</string>
     <string name="guardar">Guardar</string>
+
+    <!--  LoginFragment  -->
+    <string name="imagen_logo">Imagen del logo</string>
+    <string name="usuario">Usuario:</string>
+    <string name="usuario_hint">Escribe el usuario aquí</string>
+    <string name="contrasena">Contraseña:</string>
+    <string name="contrasena_hint">Escribe la contraseña aquí</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
