@@ -7,6 +7,21 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="titulo">Título:</string>
+    <string name="titulo_hint">Escribe el título aquí</string>
+    <string name="autor">Autor/a:</string>
+    <string name="autora">Autor o autora</string>
+    <string name="autor_hint">Escribe el autor / la autora aquí</string>
+    <string name="isbn">ISBN:</string>
+    <string name="isbn_hint">Escribe el ISBN aquí</string>
+    <string name="anio">Año de publicación:</string>
+    <string name="anio_hint">Escribe el año de publicación aquí</string>
+    <string name="fecha">Seleccionar fecha</string>
+    <string name="valoracion">Valoración:</string>
+    <string name="valoracion_hint">Teclea la valoración aquí</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="guardar">Guardar</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
