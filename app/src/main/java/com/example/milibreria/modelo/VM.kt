@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class VM(val miRepo: Repositorio) : ViewModel() {
@@ -26,6 +27,10 @@ class VM(val miRepo: Repositorio) : ViewModel() {
 
     fun actualizarLibro(libro: Libro) = viewModelScope.launch(Dispatchers.IO) {
         miRepo.actualizarLibro(libro)
+    }
+
+    fun insertarLibro(libro: Libro) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.insertarLibro(libro)
     }
 }
 

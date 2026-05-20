@@ -82,14 +82,6 @@ class MainActivity : AppCompatActivity() {
         // (menu/menu_main.xml)
         return when (item.itemId) {
             R.id.action_settings -> true
-            R.id.saltar_a_coleccion -> {
-                // TODO: Quitar este menu temporal
-                val navController = findNavController(R.id.nav_host_fragment_content_main)
-                // (navigation/nav_graph.xml)
-                navController.navigate(R.id.action_FirstFragment_to_coleccionFragment)
-                true
-            }
-
             else -> super.onOptionsItemSelected(item)
         }
     }

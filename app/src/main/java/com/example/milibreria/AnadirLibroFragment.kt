@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.milibreria.databinding.FragmentAnadirLibroBinding
+import com.example.milibreria.modelo.Libro
 import com.example.milibreria.modelo.VM
 import java.util.Calendar
 
@@ -31,20 +32,27 @@ class AnadirLibroFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Recuperar índice del libro seleccionado
-        val posicion = arguments?.getInt("posicion") ?: 0
-        var libro = miViewModel.getLibro(posicion)
+        // Si no se recibe posición, el valor por defecto será "-1" (Modo Añadir)
+        val posicion = arguments?.getInt("posicion") ?: -1
 
-        // En vez de hacer esto aquí se puede hacer la diferenciación entre
-        // El caso de editar y el caso de añadir
-        libro = libro!!
+        var libro = if (posicion != -1) {
+            miViewModel.getLibro(posicion)!!
+        } else {
+            Libro(
+                titulo = "",
+                autor = null,
+                isbn = null,
+                publicacion = null,
+                valoracion = null,
+                usuario_id = (activity as MainActivity).miViewModel.usuarioActual.value?.id ?: 0
+            )
+        }
 
-        // Mostrar datos iniciales en los EditText correspondientes
         binding.etDetalleTitulo.setText(libro.titulo)
         binding.etDetalleAutor.setText(libro.autor)
         binding.etDetalleIsbn.setText(libro.isbn)
-        binding.etDetallePublicacion.setText(libro.publicacion.toString())
-        binding.etDetalleValoracion.setText(libro.valoracion.toString())
+        binding.etDetallePublicacion.setText(libro.publicacion?.toString() ?: "")
+        binding.etDetalleValoracion.setText(libro.valoracion?.toString() ?: "")
 
         // Configuración del botón para abrir el Calendario (DatePickerDialog)
         binding.btnCalendario.setOnClickListener {
@@ -54,7 +62,7 @@ class AnadirLibroFragment : Fragment() {
             val diaActual = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePicker = DatePickerDialog(requireContext(), { _, year, _, _ ->
-                // Guardar únicamente el año seleccionado como se ve en tu modelo de datos
+                // Guardar únicamente el año seleccionado
                 binding.etDetallePublicacion.setText(year.toString())
             }, anioActual, mesActual, diaActual)
 
@@ -66,17 +74,23 @@ class AnadirLibroFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        // Botón Guardar: Actualiza el objeto en la lista y regresa
+        // Botón Guardar
         binding.btnGuardar.setOnClickListener {
             libro.titulo = binding.etDetalleTitulo.text.toString()
             libro.autor = binding.etDetalleAutor.text.toString()
             libro.isbn = binding.etDetalleIsbn.text.toString()
-            libro.publicacion = binding.etDetallePublicacion.text.toString().toIntOrNull() ?: 0
-            libro.valoracion = binding.etDetalleValoracion.text.toString().toDoubleOrNull() ?: 0.0
+            libro.publicacion = binding.etDetallePublicacion.text.toString().toIntOrNull()
+            libro.valoracion = binding.etDetalleValoracion.text.toString().toDoubleOrNull()
 
-            (activity as MainActivity).miViewModel.actualizarLibro(libro)
+            if (posicion != -1) {
+                // Modo Edición: Modifica el libro existente en la lista
+                (activity as MainActivity).miViewModel.actualizarLibro(libro)
+            } else {
+                // Modo Añadir: Agrega el nuevo libro al ViewModel
+                (activity as MainActivity).miViewModel.insertarLibro(libro)
+            }
 
-            // Regresa a la ventana de la Colección mostrando los cambios actualizados
+            // Regresa a la pantalla anterior del flujo de navegación
             findNavController().navigateUp()
         }
     }

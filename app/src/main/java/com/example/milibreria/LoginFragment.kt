@@ -12,6 +12,7 @@ import com.example.milibreria.databinding.FragmentLoginBinding
 import com.example.milibreria.modelo.VM
 
 class LoginFragment : Fragment() {
+
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -54,7 +55,7 @@ class LoginFragment : Fragment() {
                         // Navegación hacia FirstFragment respetando el nav_graph
                         (activity as MainActivity).miViewModel.cargarLibros(usuarioActual.id)
                         (activity as MainActivity).miViewModel.libros.observe(viewLifecycleOwner) {
-                            findNavController().navigate(R.id.action_loginFragment_to_FirstFragment)
+                            findNavController().navigate(R.id.action_loginFragment_to_menuLibroFragment)
                         }
                     } else {
                         Toast.makeText(
@@ -72,4 +73,5 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }
