@@ -11,8 +11,21 @@
         android:label="Iniciar Sesión"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_FirstFragment"
+            android:id="@+id/action_loginFragment_to_menuLibroFragment"
+            app:destination="@id/menuLibroFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuLibroFragment"
+        android:name="com.example.milibreria.MenuLibroFragment"
+        android:label="Menú Principal"
+        tools:layout="@layout/fragment_menu_libro">
+        <action
+            android:id="@+id/action_homeFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detalleLibroFragment"
+            app:destination="@id/anadirLibroFragment" />
     </fragment>
 
     <fragment

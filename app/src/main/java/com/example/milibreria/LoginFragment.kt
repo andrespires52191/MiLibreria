@@ -12,6 +12,7 @@ import com.example.milibreria.databinding.FragmentLoginBinding
 import com.example.milibreria.modelo.VM
 
 class LoginFragment : Fragment() {
+
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -35,8 +36,8 @@ class LoginFragment : Fragment() {
             if (usuario.isNotEmpty() && contrasenia.isNotEmpty()) {
                 miViewModel.autentificar(usuario, contrasenia)
 
-                // Navegación hacia FirstFragment respetando el nuevo nav_graph
-                findNavController().navigate(R.id.action_loginFragment_to_FirstFragment)
+                // Redirige al HomeFragment
+                findNavController().navigate(R.id.action_loginFragment_to_menuLibroFragment)
             } else {
                 Toast.makeText(requireContext(), "Por favor, introduce tus credenciales", Toast.LENGTH_SHORT).show()
             }
@@ -47,4 +48,5 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }
