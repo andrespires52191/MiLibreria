@@ -32,13 +32,38 @@ class LoginFragment : Fragment() {
             val usuario = binding.etLoginUsuario.text.toString()
             val contrasenia = binding.etLoginPassword.text.toString()
 
-            if (usuario.isNotEmpty() && contrasenia.isNotEmpty()) {
+            var errores = ""
+            if (usuario.isEmpty())
+                errores += "Introduce el usuario\n"
+            if (contrasenia.isEmpty())
+                errores += "Introduce el usuario y la contraseña\n"
+
+            if (errores.isNotEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    errores,
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                // Intentar acceso
                 miViewModel.autentificar(usuario, contrasenia)
 
-                // Navegación hacia FirstFragment respetando el nuevo nav_graph
-                findNavController().navigate(R.id.action_loginFragment_to_FirstFragment)
-            } else {
-                Toast.makeText(requireContext(), "Por favor, introduce tus credenciales", Toast.LENGTH_SHORT).show()
+                // Esperar el resultado de la autenticación
+                (activity as MainActivity).miViewModel.usuarioActual.observe(viewLifecycleOwner) { usuarioActual ->
+                    if (usuarioActual != null) {
+                        // Navegación hacia FirstFragment respetando el nav_graph
+                        (activity as MainActivity).miViewModel.cargarLibros(usuarioActual.id)
+                        (activity as MainActivity).miViewModel.libros.observe(viewLifecycleOwner) {
+                            findNavController().navigate(R.id.action_loginFragment_to_FirstFragment)
+                        }
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Credenciales incorrectas",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
             }
         }
     }

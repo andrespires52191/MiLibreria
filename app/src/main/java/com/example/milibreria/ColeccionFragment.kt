@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.example.milibreria.adaptador.AdaptadorLibros
 import com.example.milibreria.databinding.FragmentColeccionBinding
 
@@ -33,10 +32,12 @@ class ColeccionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val libros = (activity as MainActivity).miViewModel.listaLibros()
+        binding.cfrvColeccion.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(activity)
 
-        binding.cfrvColeccion.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
-        binding.cfrvColeccion.adapter = AdaptadorLibros(libros)
+        (activity as MainActivity).miViewModel.libros.observe(viewLifecycleOwner) { libros ->
+            binding.cfrvColeccion.adapter = AdaptadorLibros(libros.toMutableList())
+        }
     }
 
     override fun onDestroyView() {

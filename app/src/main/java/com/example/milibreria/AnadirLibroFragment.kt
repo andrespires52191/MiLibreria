@@ -33,7 +33,11 @@ class AnadirLibroFragment : Fragment() {
 
         // Recuperar índice del libro seleccionado
         val posicion = arguments?.getInt("posicion") ?: 0
-        val libro = miViewModel.listaLibros()[posicion]
+        var libro = miViewModel.getLibro(posicion)
+
+        // En vez de hacer esto aquí se puede hacer la diferenciación entre
+        // El caso de editar y el caso de añadir
+        libro = libro!!
 
         // Mostrar datos iniciales en los EditText correspondientes
         binding.etDetalleTitulo.setText(libro.titulo)

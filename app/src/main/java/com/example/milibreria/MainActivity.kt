@@ -15,18 +15,23 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import com.example.milibreria.databinding.ActivityMainBinding
+import com.example.milibreria.modelo.LibreriaBBDD
+import com.example.milibreria.modelo.LibreriaViewModelFactory
+import com.example.milibreria.modelo.Repositorio
+import com.example.milibreria.modelo.Usuario
 import com.example.milibreria.modelo.VM
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    // Cuando esté funcionando debería parecerse a esto:
-    //val miDataBase by lazy { BBDD.getDatabase(this)}
-    //val miRepositorio by lazy { Repositorio(miDataBase.miDAO()) }
-    //val miViewModel:VM by viewModels { ConcesionarioViewModelFactory(miRepositorio) }
-    val miViewModel: VM by viewModels()
+    val miDataBase by lazy { LibreriaBBDD.getInstance(this) }
+    val miRepositorio by lazy { Repositorio(miDataBase.libreriaDAO) }
+    val miViewModel: VM by viewModels { LibreriaViewModelFactory(miRepositorio) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +53,12 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val viewModelScope = CoroutineScope(Dispatchers.IO)
+        viewModelScope.launch {
+            var usuario = Usuario(0, "abcd", "1234")
+            miViewModel.autentificar(usuario.nombre, usuario.contrasenia)
+        }
 
         // Se puede borrar:
         binding.fab.setOnClickListener { view ->
@@ -78,6 +89,7 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.action_FirstFragment_to_coleccionFragment)
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
