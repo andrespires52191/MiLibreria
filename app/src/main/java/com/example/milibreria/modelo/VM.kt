@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class VM(val miRepo: Repositorio) : ViewModel() {
     lateinit var usuarioActual: LiveData<Usuario?>
@@ -19,6 +22,10 @@ class VM(val miRepo: Repositorio) : ViewModel() {
 
     fun getLibro(posicion: Int): Libro? {
         return libros.value?.get(posicion)
+    }
+
+    fun actualizarLibro(libro: Libro) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.actualizarLibro(libro)
     }
 }
 

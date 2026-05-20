@@ -3,6 +3,7 @@ package com.example.milibreria.modelo
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -12,6 +13,9 @@ interface LibreriaDAO {
 
     @Insert
     fun insertarUsuario(usuario: Usuario)
+
+    @Update
+    fun actualizarLibro(libro: Libro)
 
     @Query("SELECT * FROM libro  WHERE usuario_id = :usuarioId ORDER BY titulo")
     fun cargarLibros(usuarioId: Int): Flow<List<Libro>>

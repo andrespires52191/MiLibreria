@@ -74,6 +74,8 @@ class AnadirLibroFragment : Fragment() {
             libro.publicacion = binding.etDetallePublicacion.text.toString().toIntOrNull() ?: 0
             libro.valoracion = binding.etDetalleValoracion.text.toString().toDoubleOrNull() ?: 0.0
 
+            (activity as MainActivity).miViewModel.actualizarLibro(libro)
+
             // Regresa a la ventana de la Colección mostrando los cambios actualizados
             findNavController().navigateUp()
         }
