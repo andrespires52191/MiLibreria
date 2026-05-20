@@ -6,17 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.milibreria.databinding.FragmentLoginBinding
-import com.example.milibreria.modelo.VM
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-
-    private val miViewModel: VM by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,8 +42,8 @@ class LoginFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             } else {
-                // Intentar acceso
-                miViewModel.autentificar(usuario, contrasenia)
+                // Intentar acceso usando el ViewModel de la Activity
+                (activity as MainActivity).miViewModel.autentificar(usuario, contrasenia)
 
                 // Esperar el resultado de la autenticación
                 (activity as MainActivity).miViewModel.usuarioActual.observe(viewLifecycleOwner) { usuarioActual ->
