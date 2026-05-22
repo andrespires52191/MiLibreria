@@ -30,10 +30,12 @@ class LoginFragment : Fragment() {
             val contrasenia = binding.etLoginPassword.text.toString()
 
             var errores = ""
-            if (usuario.isEmpty())
-                errores += "Introduce el usuario\n"
-            if (contrasenia.isEmpty())
-                errores += "Introduce el usuario y la contraseña\n"
+            if (usuario.isEmpty() && contrasenia.isEmpty())
+                errores = "Introduce el usuario y la contraseña.\n"
+            else if (usuario.isEmpty())
+                errores = "Introduce el usuario.\n"
+            else if (contrasenia.isEmpty())
+                errores = "Introduce la contraseña.\n"
 
             if (errores.isNotEmpty()) {
                 Toast.makeText(

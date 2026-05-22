@@ -5,16 +5,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.milibreria.modelo.relaciones.PrestamoDetallado
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class VM(val miRepo: Repositorio) : ViewModel() {
-    lateinit var usuarioActual: LiveData<Usuario?>
     lateinit var libros: LiveData<List<Libro>>
+    lateinit var usuarioActual: LiveData<Usuario?>
+    lateinit var todosLosUsuarios: LiveData<List<Usuario>>
+    lateinit var todosLosPrestamos: LiveData<List<PrestamoDetallado>>
 
-    fun autentificar(usuario: String, contrasenia: String) {
-        usuarioActual = miRepo.autenticar(usuario, contrasenia).asLiveData()
+    // === LIBROS ===
+
+    fun insertarLibro(libro: Libro) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.insertarLibro(libro)
+    }
+
+    fun actualizarLibro(libro: Libro) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.actualizarLibro(libro)
     }
 
     fun cargarLibros(usuarioID: Int) {
@@ -25,13 +34,41 @@ class VM(val miRepo: Repositorio) : ViewModel() {
         return libros.value?.get(posicion)
     }
 
-    fun actualizarLibro(libro: Libro) = viewModelScope.launch(Dispatchers.IO) {
-        miRepo.actualizarLibro(libro)
+    // === USUARIOS ===
+
+    fun insertarUsuario(usuario: Usuario) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.insertarUsuario(usuario)
     }
 
-    fun insertarLibro(libro: Libro) = viewModelScope.launch(Dispatchers.IO) {
-        miRepo.insertarLibro(libro)
+    fun actualizarUsuario(usuario: Usuario) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.actualizarUsuario(usuario)
     }
+
+    fun cargarUsuarios() {
+        todosLosUsuarios = miRepo.cargarUsuarios().asLiveData()
+    }
+
+    fun getUsuario(posicion: Int): Usuario? = todosLosUsuarios.value?.get(posicion)
+
+    fun autentificar(usuario: String, contrasenia: String) {
+        usuarioActual = miRepo.autenticar(usuario, contrasenia).asLiveData()
+    }
+
+    // === PRÉSTAMOS ===
+
+    fun insertarPrestamo(prestamo: Prestamo) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.insertarPrestamo(prestamo)
+    }
+
+    fun actualizarPrestamo(prestamo: Prestamo) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.actualizarPrestamo(prestamo)
+    }
+
+    fun cargarPrestamos() {
+        todosLosPrestamos = miRepo.cargarPrestamos().asLiveData()
+    }
+
+    fun getPrestamoDetallado(posicion: Int): PrestamoDetallado? = todosLosPrestamos.value?.get(posicion)
 }
 
 class LibreriaViewModelFactory(private val miRepo: Repositorio) : ViewModelProvider.Factory {

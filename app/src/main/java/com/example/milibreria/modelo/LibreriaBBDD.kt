@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,9 +15,11 @@ import kotlinx.coroutines.flow.first
 @Database(
     entities = [
         Usuario::class,
-        Libro::class
+        Libro::class,
+        Prestamo::class
     ],
-    version = 1
+    version = 2,
+    exportSchema = false
 )
 abstract class LibreriaBBDD : RoomDatabase() {
 
@@ -26,6 +29,24 @@ abstract class LibreriaBBDD : RoomDatabase() {
         @Volatile
         private var INSTANCE: LibreriaBBDD? = null
 
+        // --- DEFINICIÓN DE LA MIGRACIÓN ---
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS `Prestamo` (
+                        `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+                        `libro_id` INTEGER NOT NULL, 
+                        `usuario_id` INTEGER NOT NULL, 
+                        `fechaInicio` TEXT NOT NULL, 
+                        `fechaFin` TEXT NOT NULL, 
+                        FOREIGN KEY(`libro_id`) REFERENCES `Libro`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, 
+                        FOREIGN KEY(`usuario_id`) REFERENCES `Usuario`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION 
+                    )
+                """.trimIndent()
+                )
+            }
+        }
 
         // Callback que se ejecuta cuando se crea la base de datos
         private val roomCallback = object : RoomDatabase.Callback() {
@@ -75,6 +96,22 @@ abstract class LibreriaBBDD : RoomDatabase() {
                     )
 
                     librosIniciales.forEach { libro -> INSTANCE?.libreriaDAO?.insertarLibro(libro) }
+
+                    // --- AÑADIR PRÉSTAMOS INICIALES DE PRUEBA (Para instalaciones desde cero) ---
+                    // Recuperar el ID del primer libro que se acaba de insertar para no romper la clave foránea
+                    val librosInsertados = INSTANCE?.libreriaDAO?.cargarLibros(userId)?.first()
+                    val libroId = librosInsertados?.firstOrNull()?.id ?: 0
+
+                    if (libroId != 0) {
+                        val prestamoInicial = Prestamo(
+                            id = 0,
+                            libro_id = libroId,
+                            usuario_id = userId,
+                            fechaInicio = "22/05/2026",
+                            fechaFin = "05/06/2026"
+                        )
+                        INSTANCE?.libreriaDAO?.insertarPrestamo(prestamoInicial)
+                    }
                 }
             }
         }
@@ -86,6 +123,7 @@ abstract class LibreriaBBDD : RoomDatabase() {
                     LibreriaBBDD::class.java,
                     "libreria_db"
                 )
+                    .addMigrations(MIGRATION_1_2)
                     .addCallback(roomCallback)
                     .build().also {
                         INSTANCE = it

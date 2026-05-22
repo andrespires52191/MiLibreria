@@ -26,6 +26,12 @@
         <action
             android:id="@+id/action_menuLibroFragment_to_coleccionFragment"
             app:destination="@id/coleccionFragment" />
+        <action
+            android:id="@+id/action_menuLibroFragment_to_coleccionUsuariosFragment"
+            app:destination="@id/coleccionUsuariosFragment" />
+        <action
+            android:id="@+id/action_menuLibroFragment_to_coleccionPrestamosFragment"
+            app:destination="@id/coleccionPrestamosFragment" />
     </fragment>
 
     <fragment
@@ -63,4 +69,35 @@
         android:name="com.example.milibreria.AnadirLibroFragment"
         android:label="Añadir Libro"
         tools:layout="@layout/fragment_anadir_libro" />
+    <fragment
+        android:id="@+id/coleccionUsuariosFragment"
+        android:name="com.example.milibreria.ColeccionUsuariosFragment"
+        android:label="Lista de Usuarios"
+        tools:layout="@layout/fragment_coleccion_usuarios">
+        <action
+            android:id="@+id/action_coleccionUsuariosFragment_to_anadirUsuarioFragment"
+            app:destination="@id/anadirUsuarioFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/anadirUsuarioFragment"
+        android:name="com.example.milibreria.AnadirUsuarioFragment"
+        android:label="Gestionar Usuario"
+        tools:layout="@layout/fragment_anadir_usuario" />
+
+    <fragment
+        android:id="@+id/coleccionPrestamosFragment"
+        android:name="com.example.milibreria.ColeccionPrestamosFragment"
+        android:label="Lista de Préstamos"
+        tools:layout="@layout/fragment_coleccion_prestamos">
+        <action
+            android:id="@+id/action_coleccionPrestamosFragment_to_anadirPrestamoFragment"
+            app:destination="@id/anadirPrestamoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/anadirPrestamoFragment"
+        android:name="com.example.milibreria.AnadirPrestamoFragment"
+        android:label="Gestionar Préstamo"
+        tools:layout="@layout/fragment_anadir_prestamo" />
 </navigation>
