@@ -31,6 +31,9 @@
     <string name="contrasena_hint">Escribe la contraseña aquí</string>
     <string name="iniciar_sesion">Iniciar sesión</string>
 
+    <!--  AnadirUsuarioFragment  -->
+    <string name="nombre_usuario">Nombre de Usuario</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

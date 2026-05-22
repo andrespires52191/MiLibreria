@@ -1,1 +1,96 @@
-<!-- TODO : Hacer -->
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".AnadirUsuarioFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="32dp">
+
+        <TextView
+            android:id="@+id/tvLabelNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombre_usuario"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+<!-- TODO : Me falta poner en el 'strings.xml' lo demás de los warnings -->
+        <EditText
+            android:id="@+id/etUsuarioNombre"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_border"
+            android:hint="Ej. Juan Pérez"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName|textCapWords"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelNombreUsuario" />
+
+        <TextView
+            android:id="@+id/tvLabelPasswordUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Contraseña de Acceso"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etUsuarioNombre" />
+
+        <EditText
+            android:id="@+id/etUsuarioPassword"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_border"
+            android:hint="Introduce la contraseña"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelPasswordUsuario" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelarUsuario"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:text="Cancelar"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:backgroundTint="#94D1BE"
+            app:cornerRadius="28dp"
+            app:layout_constraintEnd_toStartOf="@id/btnGuardarUsuario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etUsuarioPassword" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardarUsuario"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:text="Guardar"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:backgroundTint="#008566"
+            app:cornerRadius="28dp"
+            app:layout_constraintBottom_toBottomOf="@id/btnCancelarUsuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnCancelarUsuario"
+            app:layout_constraintTop_toTopOf="@id/btnCancelarUsuario" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

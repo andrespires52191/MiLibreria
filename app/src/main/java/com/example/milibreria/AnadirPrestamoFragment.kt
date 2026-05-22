@@ -19,40 +19,6 @@ import java.util.Calendar
 
 class AnadirPrestamoFragment : Fragment() {
 
-//    TODO : Hacer
-
-/*
-    // Dentro del onViewCreated de AnadirPrestamoFragment:
-    val posicion = arguments?.getInt("posicion") ?: -1
-
-    if (posicion != -1) {
-        // Modo Visualización/Edición
-        val prestamoDetalle = miViewModel.getPrestamoDetallado(posicion)
-        prestamoDetalle?.let {
-            binding.etFechaInicio.setText(it.prestamo.fechaInicio)
-            binding.etFechaFin.setText(it.prestamo.fechaFin)
-            // Bloquear o asignar los selectores correspondientes a it.libro e it.usuario
-        }
-    }
-
-    binding.btnGuardar.setOnClickListener {
-        val nuevoPrestamo = Prestamo(
-            libro_id = idLibroSeleccionado, // ID obtenido de tu interfaz o spinner
-            usuario_id = idUsuarioSeleccionado,
-            fechaInicio = binding.etFechaInicio.text.toString(),
-            fechaFin = binding.etFechaFin.text.toString()
-        )
-
-        if (posicion != -1) {
-            nuevoPrestamo.id = miViewModel.getPrestamoDetallado(posicion)!!.prestamo.id
-            miViewModel.actualizarPrestamo(nuevoPrestamo)
-        } else {
-            miViewModel.insertarPrestamo(nuevoPrestamo)
-        }
-        findNavController().navigateUp()
-    }
-    */
-
     private var _binding: FragmentAnadirPrestamoBinding? = null
     private val binding get() = _binding!!
 
@@ -79,7 +45,7 @@ class AnadirPrestamoFragment : Fragment() {
 
         // 1. Cargar datos obligatorios en los Spinners (Desplegables)
         // Para prestar necesitamos saber qué libros y qué usuarios existen en el sistema global
-        miViewModel.cargarTodosLosUsuarios()
+        miViewModel.cargarUsuarios()
 
         // Observamos los usuarios globales para llenar su Spinner
         miViewModel.todosLosUsuarios.observe(viewLifecycleOwner) { usuarios ->

@@ -2,14 +2,11 @@ package com.example.milibreria.adaptador
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.milibreria.R
 import com.example.milibreria.databinding.ItemPrestamoBinding
-import com.example.milibreria.modelo.Usuario
+import com.example.milibreria.modelo.relaciones.PrestamoDetallado
 
-class AdaptadorPrestamos(val lista: List<Usuario>, val onClick: (Int) -> Unit) :
+class AdaptadorPrestamos(val lista: List<PrestamoDetallado>, val onClick: (Int) -> Unit) :
     RecyclerView.Adapter<AdaptadorPrestamos.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,28 +18,11 @@ class AdaptadorPrestamos(val lista: List<Usuario>, val onClick: (Int) -> Unit) :
         val item = lista[position]
         holder.binding.iptvLibroTitulo.text = item.libro.titulo
         holder.binding.iptvUsuarioNombre.text = item.usuario.nombre
-        // TODO : Poner lo de fechas
-        //holder.binding.iptvFechas.text = "${item.prestamo.fechaInicio} hasta ${item.prestamo.fechaFin}"
+        holder.binding.iptvFechas.text = "${item.prestamo.fechaInicio} - ${item.prestamo.fechaFin}"
         holder.binding.root.setOnClickListener { onClick(position) }
     }
 
-    override fun getItemCount(): Int {
-        return lista.count()
-    }
+    override fun getItemCount(): Int = lista.size
 
-    inner class ViewHolder(val binding: ItemPrestamoBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        var posicion: Int = 0
-
-        init {
-            binding.root.setOnClickListener {
-                val miBundle = bundleOf("posicion" to posicion)
-
-                binding.root.findNavController().navigate(
-                    R.id.action_coleccionFragment_to_anadirPrestamoFragment,
-                    miBundle
-                )
-            }
-        }
-    }
+    inner class ViewHolder(val binding: ItemPrestamoBinding) : RecyclerView.ViewHolder(binding.root)
 }
