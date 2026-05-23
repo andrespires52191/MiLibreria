@@ -5,49 +5,63 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
+    app:strokeColor="@color/verde_primario"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
-        <!-- TODO : Me falta poner en el 'strings.xml' lo de los warnings -->
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/ivPrestamoThumb"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/imagen_logo"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/iptvLibroTitulo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:text="Título del Libro"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPrestamoThumb"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/iptvUsuarioNombre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:text="Prestado a: Juan Pérez"
             android:textColor="#555555"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPrestamoThumb"
             app:layout_constraintTop_toBottomOf="@id/iptvLibroTitulo" />
 
         <TextView
             android:id="@+id/iptvFechas"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
             android:text="01/05/2026 hasta 15/05/2026"
             android:textColor="#008566"
             android:textSize="13sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPrestamoThumb"
             app:layout_constraintTop_toBottomOf="@id/iptvUsuarioNombre" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
