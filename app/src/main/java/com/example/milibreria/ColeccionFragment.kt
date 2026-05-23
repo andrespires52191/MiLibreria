@@ -8,6 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
@@ -51,6 +52,7 @@ class ColeccionFragment : Fragment() {
                         findNavController().navigateUp()
                         true
                     }
+
                     else -> false
                 }
             }
@@ -59,8 +61,22 @@ class ColeccionFragment : Fragment() {
         binding.cfrvColeccion.layoutManager =
             androidx.recyclerview.widget.LinearLayoutManager(activity)
 
+        // Observar los cambios en la lista de libros
         (activity as MainActivity).miViewModel.libros.observe(viewLifecycleOwner) { libros ->
-            binding.cfrvColeccion.adapter = AdaptadorLibros(libros.toMutableList())
+            // Pasar la lista y el bloque de código que se activará al clicar en la papelera
+            binding.cfrvColeccion.adapter =
+                AdaptadorLibros(libros.toMutableList()) { libroAEliminar ->
+
+                    // Llamar al ViewModel para eliminar el libro en segundo plano con Room
+                    (activity as MainActivity).miViewModel.eliminarLibro(libroAEliminar)
+
+                    // Mostrar un aviso rápido al usuario
+                    Toast.makeText(
+                        requireContext(),
+                        "Se ha eliminado: ${libroAEliminar.titulo}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
         }
     }
 

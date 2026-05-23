@@ -2,8 +2,9 @@ package com.example.milibreria.modelo
 
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.Query
 import androidx.room.Update
+import androidx.room.Delete
+import androidx.room.Query
 import androidx.room.Transaction
 import com.example.milibreria.modelo.relaciones.PrestamoDetallado
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +22,9 @@ interface LibreriaDAO {
 
     @Query("SELECT * FROM libro WHERE usuario_id = :usuarioId ORDER BY titulo")
     fun cargarLibros(usuarioId: Int): Flow<List<Libro>>
+
+    @Delete
+    fun eliminarLibro(libro: Libro)
 
     // === USUARIOS ===
 

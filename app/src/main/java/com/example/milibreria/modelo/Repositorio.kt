@@ -20,6 +20,10 @@ class Repositorio(val miDao: LibreriaDAO) {
         return miDao.cargarLibros(usuarioId)
     }
 
+    suspend fun eliminarLibro(libro: Libro) {
+        miDao.eliminarLibro(libro)
+    }
+
     // === USUARIOS ===
 
     suspend fun insertarUsuario(usuario: Usuario) {

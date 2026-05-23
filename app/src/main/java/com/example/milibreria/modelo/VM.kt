@@ -25,11 +25,12 @@ class VM(val miRepo: Repositorio) : ViewModel() {
 
     // === AUTENTICACIÓN Y REGISTRO ===
 
-    fun autentificar(usuario: String, contrasenia: String) = viewModelScope.launch(Dispatchers.IO) {
-        miRepo.autenticar(usuario, contrasenia).collect { usuarioLogueado ->
-            _usuarioActual.postValue(usuarioLogueado)
+    fun autentificar(usuario: String, contrasenia: String) =
+        viewModelScope.launch(Dispatchers.IO) {
+            miRepo.autenticar(usuario, contrasenia).collect { usuarioLogueado ->
+                _usuarioActual.postValue(usuarioLogueado)
+            }
         }
-    }
 
     fun registrarYAutentificar(usuario: Usuario) = viewModelScope.launch(Dispatchers.IO) {
         val usuarioExistente = miRepo.buscarUsuarioPorNombre(usuario.nombre)
@@ -67,6 +68,10 @@ class VM(val miRepo: Repositorio) : ViewModel() {
         return libros.value?.getOrNull(posicion)
     }
 
+    fun eliminarLibro(libro: Libro) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.eliminarLibro(libro)
+    }
+
     // === USUARIOS ===
 
     fun insertarUsuario(usuario: Usuario) = viewModelScope.launch(Dispatchers.IO) {
@@ -97,7 +102,8 @@ class VM(val miRepo: Repositorio) : ViewModel() {
         todosLosPrestamos = miRepo.cargarPrestamos().asLiveData()
     }
 
-    fun getPrestamoDetallado(posicion: Int): PrestamoDetallado? = todosLosPrestamos.value?.getOrNull(posicion)
+    fun getPrestamoDetallado(posicion: Int): PrestamoDetallado? =
+        todosLosPrestamos.value?.getOrNull(posicion)
 
     // TODO : Parte funcional de prueba de Logout
     /*fun logout() {

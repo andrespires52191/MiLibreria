@@ -28,11 +28,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="#000000"
             app:layout_constraintBottom_toTopOf="@id/iltvAutor"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnBorrarLibro"
             app:layout_constraintStart_toEndOf="@id/ivLibroThumb"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
@@ -42,9 +43,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnBorrarLibro"
             app:layout_constraintStart_toEndOf="@id/ivLibroThumb"
             app:layout_constraintTop_toBottomOf="@id/iltvTitulo" />
+
+        <ImageView
+            android:id="@+id/btnBorrarLibro"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:src="@android:drawable/ic_menu_delete"
+            app:tint="#D32F2F"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/borrar_libro"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -54,6 +54,8 @@
     <string name="titulo_lista_prestamos">Lista de Préstamos</string>
     <string name="titulo_gestionar_prestamo">Gestionar Préstamo</string>
 
+    <string name="borrar_libro">Borrar libro</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
