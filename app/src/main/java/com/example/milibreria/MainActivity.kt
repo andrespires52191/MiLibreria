@@ -68,7 +68,6 @@ class MainActivity : AppCompatActivity() {
 
         // (menu/menu_main.xml)
         return when (item.itemId) {
-            R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
     }

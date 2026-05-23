@@ -4,9 +4,15 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.milibreria.databinding.FragmentAnadirLibroBinding
 import com.example.milibreria.modelo.Libro
@@ -31,6 +37,19 @@ class AnadirLibroFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_anadir_libro, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    else -> false
+                }
+            }
+        },viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         // Si no se recibe posición, el valor por defecto será "-1" (Modo Añadir)
         val posicion = arguments?.getInt("posicion") ?: -1
