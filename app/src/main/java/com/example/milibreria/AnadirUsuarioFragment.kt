@@ -2,11 +2,17 @@ package com.example.milibreria
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.milibreria.databinding.FragmentAnadirUsuarioBinding
 import com.example.milibreria.modelo.Usuario
@@ -17,6 +23,9 @@ class AnadirUsuarioFragment : Fragment() {
     private var _binding: FragmentAnadirUsuarioBinding? = null
     private val binding get() = _binding!!
     private val miViewModel: VM by activityViewModels()
+
+    private var posicion: Int = -1
+    private var usuarioIdExistente: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +38,28 @@ class AnadirUsuarioFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val posicion = arguments?.getInt("posicion") ?: -1
-        var usuarioIdExistente = 0
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_anadir_usuario, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_guardar -> {
+                        guardarUsuario()
+                        true
+                    }
+                    R.id.action_cancelar -> {
+                        cancelar()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        posicion = arguments?.getInt("posicion") ?: -1
 
         if (posicion != -1) {
             // Modo Visualización/Edición
@@ -43,32 +72,40 @@ class AnadirUsuarioFragment : Fragment() {
         }
 
         binding.btnCancelarUsuario.setOnClickListener {
-            findNavController().navigateUp()
+            cancelar()
         }
 
         binding.btnGuardarUsuario.setOnClickListener {
-            val nombre = binding.etUsuarioNombre.text.toString().trim()
-            val password = binding.etUsuarioPassword.text.toString().trim()
-
-            if (nombre.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val usuario = Usuario(
-                id = if (posicion != -1) usuarioIdExistente else 0,
-                nombre = nombre,
-                contrasenia = password
-            )
-
-            if (posicion != -1) {
-                miViewModel.actualizarUsuario(usuario)
-            } else {
-                miViewModel.insertarUsuario(usuario)
-            }
-
-            findNavController().navigateUp()
+            guardarUsuario()
         }
+    }
+
+    private fun guardarUsuario() {
+        val nombre = binding.etUsuarioNombre.text.toString().trim()
+        val password = binding.etUsuarioPassword.text.toString().trim()
+
+        if (nombre.isEmpty() || password.isEmpty()) {
+            Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val usuario = Usuario(
+            id = if (posicion != -1) usuarioIdExistente else 0,
+            nombre = nombre,
+            contrasenia = password
+        )
+
+        if (posicion != -1) {
+            miViewModel.actualizarUsuario(usuario)
+        } else {
+            miViewModel.insertarUsuario(usuario)
+        }
+
+        findNavController().navigateUp()
+    }
+
+    private fun cancelar() {
+        findNavController().navigateUp()
     }
 
     override fun onDestroyView() {

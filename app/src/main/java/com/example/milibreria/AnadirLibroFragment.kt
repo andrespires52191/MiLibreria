@@ -4,9 +4,15 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.milibreria.databinding.FragmentAnadirLibroBinding
 import com.example.milibreria.modelo.Libro
@@ -21,6 +27,9 @@ class AnadirLibroFragment : Fragment() {
     // Acceder al mismo ViewModel que comparte la MainActivity
     private val miViewModel: VM by activityViewModels()
 
+    private var posicion: Int = -1
+    private lateinit var libro: Libro
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,10 +41,31 @@ class AnadirLibroFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Si no se recibe posición, el valor por defecto será "-1" (Modo Añadir)
-        val posicion = arguments?.getInt("posicion") ?: -1
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_anadir_libro, menu)
+            }
 
-        var libro = if (posicion != -1) {
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_guardar -> {
+                        guardarLibro()
+                        true
+                    }
+                    R.id.action_cancelar -> {
+                        cancelar()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        },viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        // Si no se recibe posición, el valor por defecto será "-1" (Modo Añadir)
+        posicion = arguments?.getInt("posicion") ?: -1
+
+        libro = if (posicion != -1) {
             miViewModel.getLibro(posicion)!!
         } else {
             Libro(
@@ -71,28 +101,36 @@ class AnadirLibroFragment : Fragment() {
 
         // Botón Cancelar: Vuelve atrás sin guardar cambios
         binding.btnCancelar.setOnClickListener {
-            findNavController().navigateUp()
+            cancelar()
         }
 
         // Botón Guardar
         binding.btnGuardar.setOnClickListener {
-            libro.titulo = binding.etDetalleTitulo.text.toString()
-            libro.autor = binding.etDetalleAutor.text.toString()
-            libro.isbn = binding.etDetalleIsbn.text.toString()
-            libro.publicacion = binding.etDetallePublicacion.text.toString().toIntOrNull()
-            libro.valoracion = binding.etDetalleValoracion.text.toString().toDoubleOrNull()
-
-            if (posicion != -1) {
-                // Modo Edición: Modifica el libro existente en la lista
-                (activity as MainActivity).miViewModel.actualizarLibro(libro)
-            } else {
-                // Modo Añadir: Agrega el nuevo libro al ViewModel
-                (activity as MainActivity).miViewModel.insertarLibro(libro)
-            }
-
-            // Regresa a la pantalla anterior del flujo de navegación
-            findNavController().navigateUp()
+            guardarLibro()
         }
+    }
+
+    private fun guardarLibro() {
+        libro.titulo = binding.etDetalleTitulo.text.toString()
+        libro.autor = binding.etDetalleAutor.text.toString()
+        libro.isbn = binding.etDetalleIsbn.text.toString()
+        libro.publicacion = binding.etDetallePublicacion.text.toString().toIntOrNull()
+        libro.valoracion = binding.etDetalleValoracion.text.toString().toDoubleOrNull()
+
+        if (posicion != -1) {
+            // Modo Edición: Modifica el libro existente en la lista
+            (activity as MainActivity).miViewModel.actualizarLibro(libro)
+        } else {
+            // Modo Añadir: Agrega el nuevo libro al ViewModel
+            (activity as MainActivity).miViewModel.insertarLibro(libro)
+        }
+
+        // Regresa a la pantalla anterior del flujo de navegación
+        findNavController().navigateUp()
+    }
+
+    private fun cancelar() {
+        findNavController().navigateUp()
     }
 
     override fun onDestroyView() {
