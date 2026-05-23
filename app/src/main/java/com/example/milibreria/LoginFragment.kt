@@ -1,13 +1,14 @@
 package com.example.milibreria
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.milibreria.databinding.FragmentLoginBinding
+import com.example.milibreria.modelo.Usuario
 
 class LoginFragment : Fragment() {
 
@@ -25,44 +26,59 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observarAutentificacion()
+        observarRegistro()
+
+        // Botón habitual de Iniciar Sesión
         binding.btnLoginEntrar.setOnClickListener {
-            val usuario = binding.etLoginUsuario.text.toString()
-            val contrasenia = binding.etLoginPassword.text.toString()
+            val usuario = binding.etLoginUsuario.text.toString().trim()
+            val contrasenia = binding.etLoginPassword.text.toString().trim()
 
-            var errores = ""
-            if (usuario.isEmpty() && contrasenia.isEmpty())
-                errores = "Introduce el usuario y la contraseña.\n"
-            else if (usuario.isEmpty())
-                errores = "Introduce el usuario.\n"
-            else if (contrasenia.isEmpty())
-                errores = "Introduce la contraseña.\n"
-
-            if (errores.isNotEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    errores,
-                    Toast.LENGTH_LONG
-                ).show()
+            if (usuario.isEmpty() || contrasenia.isEmpty()) {
+                Toast.makeText(requireContext(), "Rellena todos los campos.", Toast.LENGTH_SHORT)
+                    .show()
             } else {
-                // Intentar acceso usando el ViewModel de la Activity
                 (activity as MainActivity).miViewModel.autentificar(usuario, contrasenia)
+            }
+        }
 
-                // Esperar el resultado de la autenticación
-                (activity as MainActivity).miViewModel.usuarioActual.observe(viewLifecycleOwner) { usuarioActual ->
-                    if (usuarioActual != null) {
-                        // Navegación hacia FirstFragment respetando el nav_graph
-                        (activity as MainActivity).miViewModel.cargarLibros(usuarioActual.id)
-                        (activity as MainActivity).miViewModel.libros.observe(viewLifecycleOwner) {
-                            findNavController().navigate(R.id.action_loginFragment_to_menuLibroFragment)
-                        }
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Credenciales incorrectas",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+        // Botón para Registrarse y también Iniciar Sesión
+        binding.btnRegistrarAhora.setOnClickListener {
+            val usuario = binding.etLoginUsuario.text.toString().trim()
+            val contrasenia = binding.etLoginPassword.text.toString().trim()
+
+            if (usuario.isEmpty() || contrasenia.isEmpty()) {
+                Toast.makeText(requireContext(), "Introduce usuario y contraseña para registrarte.", Toast.LENGTH_SHORT).show()
+            } else {
+                val usuarioNuevo = Usuario(nombre = usuario, contrasenia = contrasenia)
+                (activity as MainActivity).miViewModel.registrarYAutentificar(usuarioNuevo)
+            }
+        }
+    }
+
+    private fun observarAutentificacion() {
+        (activity as MainActivity).miViewModel.usuarioActual.observe(viewLifecycleOwner) { usuarioActual ->
+            if (usuarioActual != null) {
+                // Preparar la carga de libros en segundo plano para cuando llegue al menú
+                (activity as MainActivity).miViewModel.cargarLibros(usuarioActual.id)
+
+                // Navegar inmediatamente sin esperar a que la lista de libros responda
+                findNavController().navigate(R.id.action_loginFragment_to_menuLibroFragment)
+            } else {
+                // Solo mostrar error si el usuario ha intentado escribir algo
+                if (binding.etLoginUsuario.text.isNotEmpty() && binding.etLoginPassword.text.isNotEmpty()) {
+                    Toast.makeText(requireContext(), "Credenciales incorrectas", Toast.LENGTH_LONG).show()
                 }
+            }
+        }
+    }
+
+    private fun observarRegistro() {
+        (activity as MainActivity).miViewModel.mensajeRegistro.observe(viewLifecycleOwner) { mensaje ->
+            if (mensaje != null) {
+                Toast.makeText(requireContext(), mensaje, Toast.LENGTH_LONG).show()
+                // Limpiar el LiveData una vez mostrado el Toast de aviso para que no repita
+                (activity as MainActivity).miViewModel.mensajeRegistro.value = null
             }
         }
     }
@@ -71,5 +87,4 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

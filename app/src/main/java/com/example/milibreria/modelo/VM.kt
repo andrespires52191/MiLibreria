@@ -1,6 +1,7 @@
 package com.example.milibreria.modelo
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -10,10 +11,43 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class VM(val miRepo: Repositorio) : ViewModel() {
-    lateinit var libros: LiveData<List<Libro>>
-    lateinit var usuarioActual: LiveData<Usuario?>
+
+    private var _usuarioActual = MutableLiveData<Usuario?>()
+    val usuarioActual: LiveData<Usuario?> get() = _usuarioActual
+
+    private var _libros: LiveData<List<Libro>> = MutableLiveData()
+    val libros: LiveData<List<Libro>> get() = _libros
+
     lateinit var todosLosUsuarios: LiveData<List<Usuario>>
     lateinit var todosLosPrestamos: LiveData<List<PrestamoDetallado>>
+
+    val mensajeRegistro = MutableLiveData<String?>()
+
+    // === AUTENTICACIÓN Y REGISTRO ===
+
+    fun autentificar(usuario: String, contrasenia: String) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.autenticar(usuario, contrasenia).collect { usuarioLogueado ->
+            _usuarioActual.postValue(usuarioLogueado)
+        }
+    }
+
+    fun registrarYAutentificar(usuario: Usuario) = viewModelScope.launch(Dispatchers.IO) {
+        val usuarioExistente = miRepo.buscarUsuarioPorNombre(usuario.nombre)
+        if (usuarioExistente != null) {
+            mensajeRegistro.postValue("El usuario ya existe")
+            return@launch
+        }
+        mensajeRegistro.postValue(null)
+
+        // 1. Insertamos el usuario en la base de datos
+        miRepo.insertarUsuario(usuario)
+
+        // 2. Buscamos el usuario recién creado para obtener su ID generado por Room
+        val usuarioRegistrado = miRepo.buscarUsuarioPorNombre(usuario.nombre)
+
+        // 3. Le avisamos al Fragment en el hilo principal con postValue para que navegue de inmediato
+        _usuarioActual.postValue(usuarioRegistrado)
+    }
 
     // === LIBROS ===
 
@@ -26,11 +60,11 @@ class VM(val miRepo: Repositorio) : ViewModel() {
     }
 
     fun cargarLibros(usuarioID: Int) {
-        libros = miRepo.cargarLibros(usuarioID).asLiveData()
+        _libros = miRepo.cargarLibros(usuarioID).asLiveData()
     }
 
     fun getLibro(posicion: Int): Libro? {
-        return libros.value?.get(posicion)
+        return libros.value?.getOrNull(posicion)
     }
 
     // === USUARIOS ===
@@ -47,11 +81,7 @@ class VM(val miRepo: Repositorio) : ViewModel() {
         todosLosUsuarios = miRepo.cargarUsuarios().asLiveData()
     }
 
-    fun getUsuario(posicion: Int): Usuario? = todosLosUsuarios.value?.get(posicion)
-
-    fun autentificar(usuario: String, contrasenia: String) {
-        usuarioActual = miRepo.autenticar(usuario, contrasenia).asLiveData()
-    }
+    fun getUsuario(posicion: Int): Usuario? = todosLosUsuarios.value?.getOrNull(posicion)
 
     // === PRÉSTAMOS ===
 
@@ -67,7 +97,7 @@ class VM(val miRepo: Repositorio) : ViewModel() {
         todosLosPrestamos = miRepo.cargarPrestamos().asLiveData()
     }
 
-    fun getPrestamoDetallado(posicion: Int): PrestamoDetallado? = todosLosPrestamos.value?.get(posicion)
+    fun getPrestamoDetallado(posicion: Int): PrestamoDetallado? = todosLosPrestamos.value?.getOrNull(posicion)
 }
 
 class LibreriaViewModelFactory(private val miRepo: Repositorio) : ViewModelProvider.Factory {

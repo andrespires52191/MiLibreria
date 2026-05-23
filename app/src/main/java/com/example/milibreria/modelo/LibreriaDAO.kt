@@ -33,6 +33,9 @@ interface LibreriaDAO {
     @Query("SELECT * FROM usuario ORDER BY nombre")
     fun cargarUsuarios(): Flow<List<Usuario>>
 
+    @Query("SELECT * FROM usuario WHERE nombre = :nombre LIMIT 1")
+    fun buscarUsuarioPorNombre(nombre: String): Usuario?
+
     @Query("SELECT * FROM usuario WHERE nombre = :usuario AND contrasenia = :contrasenia")
     fun autenticar(usuario: String, contrasenia: String): Flow<Usuario?>
 

@@ -7,11 +7,12 @@ class Repositorio(val miDao: LibreriaDAO) {
 
     // === LIBROS ===
 
-    fun insertarLibro(libro: Libro) {
+    // "suspend" permite pausar la función en segundo plano sin congelar la pantalla
+    suspend fun insertarLibro(libro: Libro) {
         miDao.insertarLibro(libro)
     }
 
-    fun actualizarLibro(libro: Libro) {
+    suspend fun actualizarLibro(libro: Libro) {
         miDao.actualizarLibro(libro)
     }
 
@@ -21,13 +22,17 @@ class Repositorio(val miDao: LibreriaDAO) {
 
     // === USUARIOS ===
 
-    fun insertarUsuario(usuario: Usuario) {
+    suspend fun insertarUsuario(usuario: Usuario) {
         miDao.insertarUsuario(usuario)
     }
 
+    suspend fun actualizarUsuario(usuario: Usuario) = miDao.actualizarUsuario(usuario)
+
     fun cargarUsuarios(): Flow<List<Usuario>> = miDao.cargarUsuarios()
 
-    fun actualizarUsuario(usuario: Usuario) = miDao.actualizarUsuario(usuario)
+    suspend fun buscarUsuarioPorNombre(nombre: String): Usuario? {
+        return miDao.buscarUsuarioPorNombre(nombre)
+    }
 
     fun autenticar(usuario: String, contrasenia: String): Flow<Usuario?> {
         return miDao.autenticar(usuario, contrasenia)
@@ -35,9 +40,9 @@ class Repositorio(val miDao: LibreriaDAO) {
 
     // === PRÉSTAMOS ===
 
-    fun insertarPrestamo(prestamo: Prestamo) = miDao.insertarPrestamo(prestamo)
+    suspend fun insertarPrestamo(prestamo: Prestamo) = miDao.insertarPrestamo(prestamo)
 
-    fun actualizarPrestamo(prestamo: Prestamo) = miDao.actualizarPrestamo(prestamo)
+    suspend fun actualizarPrestamo(prestamo: Prestamo) = miDao.actualizarPrestamo(prestamo)
 
     fun cargarPrestamos(): Flow<List<PrestamoDetallado>> = miDao.cargarPrestamos()
 }
