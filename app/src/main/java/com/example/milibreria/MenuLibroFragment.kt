@@ -58,6 +58,22 @@ class MenuLibroFragment : Fragment() {
             val miBundle = bundleOf("posicion" to -1)
             findNavController().navigate(R.id.action_menuLibroFragment_to_anadirPrestamoFragment, miBundle)
         }
+
+        // === ACCIÓN DE CERRAR SESIÓN ===
+        binding.btnMenuLogout.setOnClickListener {
+            // 1. Limpiamos el usuario en el ViewModel
+            (activity as MainActivity).miViewModel.logout()
+
+            // 2. Volvemos a la pantalla de Login
+            // Nota: Revisa en tu nav_graph.xml que el ID de la acción desde el menú hacia el login sea exactamente este,
+            // o usa directamente el ID del fragmento de destino si tu gráfico lo permite.
+            findNavController().navigate(R.id.loginFragment) {
+                // Esto limpia el historial para que no pueda volver al menú dándole al botón "Atrás" del móvil
+                popUpTo(R.id.menuLibroFragment) {
+                    inclusive = true
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

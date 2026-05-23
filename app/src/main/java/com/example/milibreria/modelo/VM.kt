@@ -39,13 +39,13 @@ class VM(val miRepo: Repositorio) : ViewModel() {
         }
         mensajeRegistro.postValue(null)
 
-        // 1. Insertamos el usuario en la base de datos
+        // Insertar el usuario en la base de datos
         miRepo.insertarUsuario(usuario)
 
-        // 2. Buscamos el usuario recién creado para obtener su ID generado por Room
+        // Buscar el usuario recién creado para obtener su ID generado por Room
         val usuarioRegistrado = miRepo.buscarUsuarioPorNombre(usuario.nombre)
 
-        // 3. Le avisamos al Fragment en el hilo principal con postValue para que navegue de inmediato
+        // Avisar al Fragment en el hilo principal con postValue para que navegue de inmediato
         _usuarioActual.postValue(usuarioRegistrado)
     }
 
@@ -98,6 +98,10 @@ class VM(val miRepo: Repositorio) : ViewModel() {
     }
 
     fun getPrestamoDetallado(posicion: Int): PrestamoDetallado? = todosLosPrestamos.value?.getOrNull(posicion)
+
+    fun logout() {
+        _usuarioActual.postValue(null)
+    }
 }
 
 class LibreriaViewModelFactory(private val miRepo: Repositorio) : ViewModelProvider.Factory {
