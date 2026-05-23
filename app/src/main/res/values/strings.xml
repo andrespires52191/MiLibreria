@@ -22,6 +22,7 @@
     <string name="valoracion_hint">Teclea la valoración aquí</string>
     <string name="cancelar">Cancelar</string>
     <string name="guardar">Guardar</string>
+    <string name="volver">Volver</string>
 
     <!--  LoginFragment  -->
     <string name="imagen_logo">Imagen del logo</string>
@@ -33,6 +34,14 @@
 
     <!--  AnadirUsuarioFragment  -->
     <string name="nombre_usuario">Nombre de Usuario</string>
+
+    <!--  MenuLibroFragment  -->
+    <string name="anadir_libro">Añadir Libro</string>
+    <string name="ver_libros">Ver Libros</string>
+    <string name="anadir_usuario">Añadir Usuario</string>
+    <string name="ver_usuarios">Ver Usuarios</string>
+    <string name="anadir_prestamo">Nuevo Préstamo</string>
+    <string name="ver_prestamos">Ver Préstamos</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

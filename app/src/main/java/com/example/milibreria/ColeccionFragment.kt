@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.milibreria.adaptador.AdaptadorLibros
 import com.example.milibreria.databinding.FragmentColeccionBinding
 
@@ -46,6 +47,10 @@ class ColeccionFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
+                    R.id.volver -> {
+                        findNavController().navigateUp()
+                        true
+                    }
                     else -> false
                 }
             }

@@ -24,6 +24,9 @@ class AnadirUsuarioFragment : Fragment() {
     private val binding get() = _binding!!
     private val miViewModel: VM by activityViewModels()
 
+    private var posicion: Int = -1
+    private var usuarioIdExistente: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,13 +46,20 @@ class AnadirUsuarioFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
+                    R.id.action_guardar -> {
+                        guardarUsuario()
+                        true
+                    }
+                    R.id.action_cancelar -> {
+                        cancelar()
+                        true
+                    }
                     else -> false
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        val posicion = arguments?.getInt("posicion") ?: -1
-        var usuarioIdExistente = 0
+        posicion = arguments?.getInt("posicion") ?: -1
 
         if (posicion != -1) {
             // Modo Visualización/Edición
@@ -62,32 +72,40 @@ class AnadirUsuarioFragment : Fragment() {
         }
 
         binding.btnCancelarUsuario.setOnClickListener {
-            findNavController().navigateUp()
+            cancelar()
         }
 
         binding.btnGuardarUsuario.setOnClickListener {
-            val nombre = binding.etUsuarioNombre.text.toString().trim()
-            val password = binding.etUsuarioPassword.text.toString().trim()
-
-            if (nombre.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val usuario = Usuario(
-                id = if (posicion != -1) usuarioIdExistente else 0,
-                nombre = nombre,
-                contrasenia = password
-            )
-
-            if (posicion != -1) {
-                miViewModel.actualizarUsuario(usuario)
-            } else {
-                miViewModel.insertarUsuario(usuario)
-            }
-
-            findNavController().navigateUp()
+            guardarUsuario()
         }
+    }
+
+    private fun guardarUsuario() {
+        val nombre = binding.etUsuarioNombre.text.toString().trim()
+        val password = binding.etUsuarioPassword.text.toString().trim()
+
+        if (nombre.isEmpty() || password.isEmpty()) {
+            Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val usuario = Usuario(
+            id = if (posicion != -1) usuarioIdExistente else 0,
+            nombre = nombre,
+            contrasenia = password
+        )
+
+        if (posicion != -1) {
+            miViewModel.actualizarUsuario(usuario)
+        } else {
+            miViewModel.insertarUsuario(usuario)
+        }
+
+        findNavController().navigateUp()
+    }
+
+    private fun cancelar() {
+        findNavController().navigateUp()
     }
 
     override fun onDestroyView() {

@@ -1,3 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_anadir_libro"
+        android:title="@string/anadir_libro"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_ver_libros"
+        android:title="@string/ver_libros"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_anadir_usuario"
+        android:title="@string/anadir_usuario"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_ver_usuarios"
+        android:title="@string/ver_usuarios"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_anadir_prestamo"
+        android:title="@string/anadir_prestamo"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_ver_prestamos"
+        android:title="@string/ver_prestamos"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/volver"
+        android:title="@string/volver"
+        app:showAsAction="never" />
 </menu>

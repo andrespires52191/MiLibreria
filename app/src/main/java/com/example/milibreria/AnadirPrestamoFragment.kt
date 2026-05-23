@@ -35,6 +35,9 @@ class AnadirPrestamoFragment : Fragment() {
     private var listaLibrosDisponibles: List<Libro> = listOf()
     private var listaUsuariosDisponibles: List<Usuario> = listOf()
 
+    private var posicion: Int = -1
+    private var prestamoIdExistente: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,13 +57,21 @@ class AnadirPrestamoFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
+                    R.id.action_guardar -> {
+                        guardarPrestamo()
+                        true
+                    }
+                    R.id.action_cancelar -> {
+                        cancelar()
+                        true
+                    }
                     else -> false
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         // Recuperar argumentos (si viene -1 es un préstamo nuevo, si no, es visualización/edición)
-        val posicion = arguments?.getInt("posicion") ?: -1
+        posicion = arguments?.getInt("posicion") ?: -1
 
         // 1. Cargar datos obligatorios en los Spinners (Desplegables)
         // Para prestar necesitamos saber qué libros y qué usuarios existen en el sistema global
@@ -103,7 +114,6 @@ class AnadirPrestamoFragment : Fragment() {
         }
 
         // 2. Configurar la vista si es Modo Visualización/Edición
-        var prestamoIdExistente = 0
         if (posicion != -1) {
             val prestamoDetalle = miViewModel.getPrestamoDetallado(posicion)
             prestamoDetalle?.let {
@@ -123,43 +133,51 @@ class AnadirPrestamoFragment : Fragment() {
 
         // 4. Botón Cancelar
         binding.btnCancelarPrestamo.setOnClickListener {
-            findNavController().navigateUp()
+            cancelar()
         }
 
         // 5. Botón Guardar
         binding.btnGuardarPrestamo.setOnClickListener {
-            val fechaInicio = binding.etFechaInicio.text.toString()
-            val fechaFin = binding.etFechaFin.text.toString()
-
-            // Validar que se haya seleccionado algo y que las fechas no estén vacías
-            if (listaLibrosDisponibles.isEmpty() || listaUsuariosDisponibles.isEmpty() || fechaInicio.isEmpty() || fechaFin.isEmpty()) {
-                Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
-            // Obtenemos los IDs reales correspondientes a los elementos seleccionados en los Spinners
-            val libroSeleccionado = listaLibrosDisponibles[binding.spinnerLibros.selectedItemPosition]
-            val usuarioSeleccionado = listaUsuariosDisponibles[binding.spinnerUsuarios.selectedItemPosition]
-
-            // Instanciamos el objeto Prestamo
-            val prestamo = Prestamo(
-                id = if (posicion != -1) prestamoIdExistente else 0,
-                libro_id = libroSeleccionado.id,
-                usuario_id = usuarioSeleccionado.id,
-                fechaInicio = fechaInicio,
-                fechaFin = fechaFin
-            )
-
-            // Guardar o actualizar a través del ViewModel
-            if (posicion != -1) {
-                miViewModel.actualizarPrestamo(prestamo)
-            } else {
-                miViewModel.insertarPrestamo(prestamo)
-            }
-
-            // Volver atrás en el flujo
-            findNavController().navigateUp()
+            guardarPrestamo()
         }
+    }
+
+    private fun guardarPrestamo() {
+        val fechaInicio = binding.etFechaInicio.text.toString()
+        val fechaFin = binding.etFechaFin.text.toString()
+
+        // Validar que se haya seleccionado algo y que las fechas no estén vacías
+        if (listaLibrosDisponibles.isEmpty() || listaUsuariosDisponibles.isEmpty() || fechaInicio.isEmpty() || fechaFin.isEmpty()) {
+            Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        // Obtenemos los IDs reales correspondientes a los elementos seleccionados en los Spinners
+        val libroSeleccionado = listaLibrosDisponibles[binding.spinnerLibros.selectedItemPosition]
+        val usuarioSeleccionado = listaUsuariosDisponibles[binding.spinnerUsuarios.selectedItemPosition]
+
+        // Instanciamos el objeto Prestamo
+        val prestamo = Prestamo(
+            id = if (posicion != -1) prestamoIdExistente else 0,
+            libro_id = libroSeleccionado.id,
+            usuario_id = usuarioSeleccionado.id,
+            fechaInicio = fechaInicio,
+            fechaFin = fechaFin
+        )
+
+        // Guardar o actualizar a través del ViewModel
+        if (posicion != -1) {
+            miViewModel.actualizarPrestamo(prestamo)
+        } else {
+            miViewModel.insertarPrestamo(prestamo)
+        }
+
+        // Volver atrás en el flujo
+        findNavController().navigateUp()
+    }
+
+    private fun cancelar() {
+        findNavController().navigateUp()
     }
 
     // Función auxiliar para desplegar el selector de fechas de Android de manera limpia

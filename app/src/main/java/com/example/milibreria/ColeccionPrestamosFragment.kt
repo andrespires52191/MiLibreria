@@ -44,6 +44,10 @@ class ColeccionPrestamosFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
+                    R.id.volver -> {
+                        findNavController().navigateUp()
+                        true
+                    }
                     else -> false
                 }
             }
