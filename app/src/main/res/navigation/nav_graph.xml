@@ -27,8 +27,14 @@
             android:id="@+id/action_menuLibroFragment_to_coleccionFragment"
             app:destination="@id/coleccionFragment" />
         <action
+            android:id="@+id/action_menuLibroFragment_to_anadirUsuarioFragment"
+            app:destination="@id/anadirUsuarioFragment" />
+        <action
             android:id="@+id/action_menuLibroFragment_to_coleccionUsuariosFragment"
             app:destination="@id/coleccionUsuariosFragment" />
+        <action
+            android:id="@+id/action_menuLibroFragment_to_anadirPrestamoFragment"
+            app:destination="@id/anadirPrestamoFragment" />
         <action
             android:id="@+id/action_menuLibroFragment_to_coleccionPrestamosFragment"
             app:destination="@id/coleccionPrestamosFragment" />

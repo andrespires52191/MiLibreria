@@ -25,15 +25,38 @@ class MenuLibroFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // El botón "Ver Colección" lleva primero al FirstFragment
+        // === ACCIONES DE LIBROS ===
+
         binding.btnHomeVer.setOnClickListener {
             findNavController().navigate(R.id.action_menuLibroFragment_to_coleccionFragment)
         }
 
-        // El botón "Añadir" lleva al de añadir un libro pasándole un "-1" para indicar que es un libro nuevo
+        // Se le pasa un "-1" para indicar que es un libro nuevo
         binding.btnHomeAnadir.setOnClickListener {
             val miBundle = bundleOf("posicion" to -1)
             findNavController().navigate(R.id.action_homeFragment_to_detalleLibroFragment, miBundle)
+        }
+
+        // === ACCIONES DE USUARIOS ===
+
+        binding.btnMenuVerUsuarios.setOnClickListener {
+            findNavController().navigate(R.id.action_menuLibroFragment_to_coleccionUsuariosFragment)
+        }
+
+        binding.btnMenuAnadirUsuario.setOnClickListener {
+            val miBundle = bundleOf("posicion" to -1)
+            findNavController().navigate(R.id.action_menuLibroFragment_to_anadirUsuarioFragment, miBundle)
+        }
+
+        // === ACCIONES DE PRÉSTAMOS ===
+
+        binding.btnMenuVerPrestamos.setOnClickListener {
+            findNavController().navigate(R.id.action_menuLibroFragment_to_coleccionPrestamosFragment)
+        }
+
+        binding.btnMenuAnadirPrestamo.setOnClickListener {
+            val miBundle = bundleOf("posicion" to -1)
+            findNavController().navigate(R.id.action_menuLibroFragment_to_anadirPrestamoFragment, miBundle)
         }
     }
 

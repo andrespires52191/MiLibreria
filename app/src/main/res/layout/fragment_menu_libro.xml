@@ -1,52 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
+    android:fillViewport="true"
     tools:context=".MenuLibroFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivHomeLogo"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="32dp"
-        android:scaleType="centerCrop"
-        android:src="@android:drawable/ic_menu_gallery"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/CircleImage" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+        <!-- TODO : Me falta poner en el 'strings.xml' lo de los warnings -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivHomeLogo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/CircleImage" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnHomeAnadir"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="48dp"
-        android:text="Añadir libro"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:backgroundTint="#008566"
-        app:cornerRadius="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivHomeLogo" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHomeAnadir"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:text="Añadir Libro"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="#008566"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toStartOf="@id/btnHomeVer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivHomeLogo" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnHomeVer"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="24dp"
-        android:text="Ver colección"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:backgroundTint="#008566"
-        app:cornerRadius="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnHomeAnadir" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHomeVer"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:text="Ver Libros"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="#008566"
+            app:cornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/btnHomeAnadir"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnHomeAnadir"
+            app:layout_constraintTop_toTopOf="@id/btnHomeAnadir" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMenuAnadirUsuario"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Añadir Usuario"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="#3F51B5"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toStartOf="@id/btnMenuVerUsuarios"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnHomeAnadir" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMenuVerUsuarios"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:text="Ver Usuarios"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="#3F51B5"
+            app:cornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/btnMenuAnadirUsuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnMenuAnadirUsuario"
+            app:layout_constraintTop_toTopOf="@id/btnMenuAnadirUsuario" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMenuAnadirPrestamo"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Nuevo Préstamo"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="#FF9800"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toStartOf="@id/btnMenuVerPrestamos"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnMenuAnadirUsuario" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMenuVerPrestamos"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:text="Ver Préstamos"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="#FF9800"
+            app:cornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/btnMenuAnadirPrestamo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnMenuAnadirPrestamo"
+            app:layout_constraintTop_toTopOf="@id/btnMenuAnadirPrestamo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

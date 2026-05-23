@@ -14,7 +14,7 @@ interface LibreriaDAO {
     // === LIBROS ===
 
     @Insert
-    fun insertarLibro(ibro: Libro)
+    fun insertarLibro(libro: Libro)
 
     @Update
     fun actualizarLibro(libro: Libro)
@@ -33,7 +33,7 @@ interface LibreriaDAO {
     @Query("SELECT * FROM usuario ORDER BY nombre")
     fun cargarUsuarios(): Flow<List<Usuario>>
 
-    @Query("SELECT * FROM usuario WHERE nombre = :usuario AND contrasenia == :contrasenia")
+    @Query("SELECT * FROM usuario WHERE nombre = :usuario AND contrasenia = :contrasenia")
     fun autenticar(usuario: String, contrasenia: String): Flow<Usuario?>
 
     // === PRÉSTAMOS ===
