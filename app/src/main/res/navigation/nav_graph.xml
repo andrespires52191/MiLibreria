@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.milibreria.LoginFragment"
-        android:label="Iniciar Sesión"
+        android:label="@string/titulo_login"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_menuLibroFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/menuLibroFragment"
         android:name="com.example.milibreria.MenuLibroFragment"
-        android:label="Menú Principal"
+        android:label="@string/titulo_menu_principal"
         tools:layout="@layout/fragment_menu_libro">
         <action
             android:id="@+id/action_homeFragment_to_detalleLibroFragment"
@@ -63,7 +63,7 @@
     <fragment
         android:id="@+id/coleccionFragment"
         android:name="com.example.milibreria.ColeccionFragment"
-        android:label="fragment_coleccion"
+        android:label="@string/titulo_lista_libros"
         tools:layout="@layout/fragment_coleccion">
 
         <action
@@ -73,12 +73,12 @@
     <fragment
         android:id="@+id/anadirLibroFragment"
         android:name="com.example.milibreria.AnadirLibroFragment"
-        android:label="Añadir Libro"
+        android:label="@string/titulo_gestionar_libro"
         tools:layout="@layout/fragment_anadir_libro" />
     <fragment
         android:id="@+id/coleccionUsuariosFragment"
         android:name="com.example.milibreria.ColeccionUsuariosFragment"
-        android:label="Lista de Usuarios"
+        android:label="@string/titulo_lista_usuarios"
         tools:layout="@layout/fragment_coleccion_usuarios">
         <action
             android:id="@+id/action_coleccionUsuariosFragment_to_anadirUsuarioFragment"
@@ -88,13 +88,13 @@
     <fragment
         android:id="@+id/anadirUsuarioFragment"
         android:name="com.example.milibreria.AnadirUsuarioFragment"
-        android:label="Gestionar Usuario"
+        android:label="@string/titulo_gestionar_usuario"
         tools:layout="@layout/fragment_anadir_usuario" />
 
     <fragment
         android:id="@+id/coleccionPrestamosFragment"
         android:name="com.example.milibreria.ColeccionPrestamosFragment"
-        android:label="Lista de Préstamos"
+        android:label="@string/titulo_lista_prestamos"
         tools:layout="@layout/fragment_coleccion_prestamos">
         <action
             android:id="@+id/action_coleccionPrestamosFragment_to_anadirPrestamoFragment"
@@ -104,6 +104,6 @@
     <fragment
         android:id="@+id/anadirPrestamoFragment"
         android:name="com.example.milibreria.AnadirPrestamoFragment"
-        android:label="Gestionar Préstamo"
+        android:label="@string/titulo_gestionar_prestamo"
         tools:layout="@layout/fragment_anadir_prestamo" />
 </navigation>

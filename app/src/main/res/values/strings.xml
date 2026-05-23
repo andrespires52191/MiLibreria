@@ -43,6 +43,16 @@
     <string name="anadir_prestamo">Nuevo Préstamo</string>
     <string name="ver_prestamos">Ver Préstamos</string>
 
+    <!-- Labels para los Fragmentos (Navigation) -->
+    <string name="titulo_login">Iniciar Sesión</string>
+    <string name="titulo_menu_principal">Menú Principal</string>
+    <string name="titulo_lista_libros">Lista de Libros</string>
+    <string name="titulo_gestionar_libro">Gestionar Libro</string>
+    <string name="titulo_lista_usuarios">Lista de Usuarios</string>
+    <string name="titulo_gestionar_usuario">Gestionar Usuario</string>
+    <string name="titulo_lista_prestamos">Lista de Préstamos</string>
+    <string name="titulo_gestionar_prestamo">Gestionar Préstamo</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
