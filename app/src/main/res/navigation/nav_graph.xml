@@ -38,6 +38,10 @@
         <action
             android:id="@+id/action_menuLibroFragment_to_coleccionPrestamosFragment"
             app:destination="@id/coleccionPrestamosFragment" />
+        <!-- TODO : Parte funcional de prueba de Logout -->
+        <!--<action
+            android:id="@+id/action_menuLibroFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />-->
     </fragment>
 
     <fragment
@@ -63,7 +67,7 @@
     <fragment
         android:id="@+id/coleccionFragment"
         android:name="com.example.milibreria.ColeccionFragment"
-        android:label="fragment_coleccion"
+        android:label="Lista de Libros"
         tools:layout="@layout/fragment_coleccion">
 
         <action

@@ -59,21 +59,21 @@ class MenuLibroFragment : Fragment() {
             findNavController().navigate(R.id.action_menuLibroFragment_to_anadirPrestamoFragment, miBundle)
         }
 
+        // TODO : Parte funcional de prueba de Logout
         // === ACCIÓN DE CERRAR SESIÓN ===
-        binding.btnMenuLogout.setOnClickListener {
-            // 1. Limpiamos el usuario en el ViewModel
+        /*binding.btnMenuLogout.setOnClickListener {
+            // Limpiar el usuario en el ViewModel
             (activity as MainActivity).miViewModel.logout()
 
-            // 2. Volvemos a la pantalla de Login
-            // Nota: Revisa en tu nav_graph.xml que el ID de la acción desde el menú hacia el login sea exactamente este,
-            // o usa directamente el ID del fragmento de destino si tu gráfico lo permite.
-            findNavController().navigate(R.id.loginFragment) {
-                // Esto limpia el historial para que no pueda volver al menú dándole al botón "Atrás" del móvil
-                popUpTo(R.id.menuLibroFragment) {
-                    inclusive = true
-                }
-            }
-        }
+            // Navegar al Login borrando el historial de golpe
+            findNavController().navigate(
+                R.id.loginFragment, // Usar el ID directo del fragmento de destino
+                null,
+                androidx.navigation.NavOptions.Builder()
+                    .setPopUpTo(R.id.nav_graph, true) // Borrar el grafo anterior
+                    .build()
+            )
+        }*/
     }
 
     override fun onDestroyView() {

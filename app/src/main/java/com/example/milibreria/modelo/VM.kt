@@ -99,9 +99,10 @@ class VM(val miRepo: Repositorio) : ViewModel() {
 
     fun getPrestamoDetallado(posicion: Int): PrestamoDetallado? = todosLosPrestamos.value?.getOrNull(posicion)
 
-    fun logout() {
+    // TODO : Parte funcional de prueba de Logout
+    /*fun logout() {
         _usuarioActual.postValue(null)
-    }
+    }*/
 }
 
 class LibreriaViewModelFactory(private val miRepo: Repositorio) : ViewModelProvider.Factory {
