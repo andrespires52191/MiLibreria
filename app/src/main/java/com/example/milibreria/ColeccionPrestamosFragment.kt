@@ -44,8 +44,12 @@ class ColeccionPrestamosFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
+                    R.id.anadir_prestamo_col -> {
+                        anadirPrestamo()
+                        true
+                    }
                     R.id.volver -> {
-                        findNavController().navigateUp()
+                        volver()
                         true
                     }
                     else -> false
@@ -67,6 +71,26 @@ class ColeccionPrestamosFragment : Fragment() {
                 }
             }
         }
+
+        binding.btnVolverPrestamos.setOnClickListener {
+            volver()
+        }
+
+        binding.btnAnadirPrestamoCol.setOnClickListener {
+            anadirPrestamo()
+        }
+    }
+
+    private fun anadirPrestamo() {
+        val bundle = bundleOf("posicion" to -1)
+        findNavController().navigate(
+            R.id.action_coleccionPrestamosFragment_to_anadirPrestamoFragment,
+            bundle
+        )
+    }
+
+    private fun volver() {
+        findNavController().navigateUp()
     }
 
     override fun onDestroyView() {

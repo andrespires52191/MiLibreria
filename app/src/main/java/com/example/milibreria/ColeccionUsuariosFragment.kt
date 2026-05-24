@@ -44,8 +44,12 @@ class ColeccionUsuariosFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
+                    R.id.anadir_usuario_col -> {
+                        anadirUsuario()
+                        true
+                    }
                     R.id.volver -> {
-                        findNavController().navigateUp()
+                        volver()
                         true
                     }
                     else -> false
@@ -67,6 +71,26 @@ class ColeccionUsuariosFragment : Fragment() {
                 }
             }
         }
+
+        binding.btnVolverUsuarios.setOnClickListener {
+            volver()
+        }
+
+        binding.btnAnadirUsuarioCol.setOnClickListener {
+            anadirUsuario()
+        }
+    }
+
+    private fun anadirUsuario() {
+        val bundle = bundleOf("posicion" to -1)
+        findNavController().navigate(
+            R.id.action_coleccionUsuariosFragment_to_anadirUsuarioFragment,
+            bundle
+        )
+    }
+
+    private fun volver() {
+        findNavController().navigateUp()
     }
 
     override fun onDestroyView() {

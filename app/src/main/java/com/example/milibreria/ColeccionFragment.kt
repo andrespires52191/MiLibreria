@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
@@ -48,8 +49,12 @@ class ColeccionFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
+                    R.id.anadir_libro_col -> {
+                        anadirLibro()
+                        true
+                    }
                     R.id.volver -> {
-                        findNavController().navigateUp()
+                        volver()
                         true
                     }
 
@@ -78,6 +83,24 @@ class ColeccionFragment : Fragment() {
                     ).show()
                 }
         }
+
+        binding.btnVolverCol.setOnClickListener {
+            volver()
+        }
+
+        binding.btnAnadirCol.setOnClickListener {
+            anadirLibro()
+        }
+    }
+
+    private fun anadirLibro() {
+        // Se le pasa un "-1" para indicar que es un libro nuevo
+        val miBundle = bundleOf("posicion" to -1)
+        findNavController().navigate(R.id.action_coleccionFragment_to_anadirLibroFragment, miBundle)
+    }
+
+    private fun volver() {
+        findNavController().navigateUp()
     }
 
     override fun onDestroyView() {
@@ -85,3 +108,4 @@ class ColeccionFragment : Fragment() {
         _binding = null
     }
 }
+

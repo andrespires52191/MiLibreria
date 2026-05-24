@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/anadir_libro_col"
+        android:title="@string/anadir_libro"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/volver"
         android:title="@string/volver"
         app:showAsAction="never" />
