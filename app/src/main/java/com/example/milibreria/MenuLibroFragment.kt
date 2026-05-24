@@ -69,8 +69,8 @@ class MenuLibroFragment : Fragment() {
                         true
                     }
 
-                    R.id.volver -> {
-                        findNavController().navigateUp()
+                    R.id.cerrar_sesion -> {
+                        cerrarSesion()
                         true
                     }
 
@@ -109,20 +109,9 @@ class MenuLibroFragment : Fragment() {
             anadirPrestamo()
         }
 
-        // TODO : Parte funcional de prueba de Logout
         // === ACCIÓN DE CERRAR SESIÓN ===
         /*binding.btnMenuLogout.setOnClickListener {
-            // Limpiar el usuario en el ViewModel
-            (activity as MainActivity).miViewModel.logout()
-
-            // Navegar al Login borrando el historial de golpe
-            findNavController().navigate(
-                R.id.loginFragment, // Usar el ID directo del fragmento de destino
-                null,
-                androidx.navigation.NavOptions.Builder()
-                    .setPopUpTo(R.id.nav_graph, true) // Borrar el grafo anterior
-                    .build()
-            )
+            cerrarSesion()
         }*/
     }
 
@@ -158,6 +147,20 @@ class MenuLibroFragment : Fragment() {
 
     private fun verPrestamos() {
         findNavController().navigate(R.id.action_menuLibroFragment_to_coleccionPrestamosFragment)
+    }
+
+    private fun cerrarSesion() {
+        // Limpiar el usuario en el ViewModel
+        (activity as MainActivity).miViewModel.logout()
+
+        // Navegar al Login borrando el historial de golpe
+        findNavController().navigate(
+            R.id.loginFragment, // Usar el ID directo del fragmento de destino
+            null,
+            androidx.navigation.NavOptions.Builder()
+                .setPopUpTo(R.id.nav_graph, true) // Borrar el grafo anterior
+                .build()
+        )
     }
 
     override fun onDestroyView() {

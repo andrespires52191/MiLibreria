@@ -23,6 +23,7 @@
     <string name="cancelar">Cancelar</string>
     <string name="guardar">Guardar</string>
     <string name="volver">Volver</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
 
     <!--  LoginFragment  -->
     <string name="imagen_logo">Imagen del logo</string>

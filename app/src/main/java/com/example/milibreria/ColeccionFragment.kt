@@ -12,10 +12,12 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.milibreria.adaptador.AdaptadorLibros
 import com.example.milibreria.databinding.FragmentColeccionBinding
+import com.example.milibreria.modelo.VM
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -27,6 +29,8 @@ class ColeccionFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val miViewModel: VM by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,14 +70,15 @@ class ColeccionFragment : Fragment() {
         binding.cfrvColeccion.layoutManager =
             androidx.recyclerview.widget.LinearLayoutManager(activity)
 
-        // Observar los cambios en la lista de libros
-        (activity as MainActivity).miViewModel.libros.observe(viewLifecycleOwner) { libros ->
+        // Cargar los libros y observar los cambios
+        miViewModel.cargarLibros()
+        miViewModel.libros.observe(viewLifecycleOwner) { libros ->
             // Pasar la lista y el bloque de código que se activará al clicar en la papelera
             binding.cfrvColeccion.adapter =
                 AdaptadorLibros(libros.toMutableList()) { libroAEliminar ->
 
                     // Llamar al ViewModel para eliminar el libro en segundo plano con Room
-                    (activity as MainActivity).miViewModel.eliminarLibro(libroAEliminar)
+                    miViewModel.eliminarLibro(libroAEliminar)
 
                     // Mostrar un aviso rápido al usuario
                     Toast.makeText(

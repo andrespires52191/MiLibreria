@@ -76,6 +76,7 @@ class AnadirPrestamoFragment : Fragment() {
         // 1. Cargar datos obligatorios en los Spinners (Desplegables)
         // Para prestar necesitamos saber qué libros y qué usuarios existen en el sistema global
         miViewModel.cargarUsuarios()
+        miViewModel.cargarLibros()
 
         // Observamos los usuarios globales para llenar su Spinner
         miViewModel.todosLosUsuarios.observe(viewLifecycleOwner) { usuarios ->

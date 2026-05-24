@@ -74,7 +74,7 @@ class AnadirLibroFragment : Fragment() {
                 isbn = null,
                 publicacion = null,
                 valoracion = null,
-                usuario_id = (activity as MainActivity).miViewModel.usuarioActual.value?.id ?: 0
+                usuario_id = miViewModel.usuarioActual.value!!.id
             )
         }
 

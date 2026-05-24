@@ -83,10 +83,7 @@ class LoginFragment : Fragment() {
         (activity as MainActivity).miViewModel.usuarioActual.observe(viewLifecycleOwner) {
             usuarioActual ->
             if (usuarioActual != null) {
-                // Preparar la carga de libros en segundo plano para cuando llegue al menú
-                (activity as MainActivity).miViewModel.cargarLibros(usuarioActual.id)
-
-                // Navegar inmediatamente sin esperar a que la lista de libros responda
+                // Navegar inmediatamente al menú principal
                 findNavController().navigate(R.id.action_loginFragment_to_menuLibroFragment)
             } else {
                 // Solo mostrar error si el usuario ha intentado escribir algo

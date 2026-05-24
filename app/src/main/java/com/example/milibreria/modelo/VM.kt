@@ -12,12 +12,10 @@ import kotlinx.coroutines.launch
 
 class VM(val miRepo: Repositorio) : ViewModel() {
 
-    private var _usuarioActual = MutableLiveData<Usuario?>()
+    private var _usuarioActual = MutableLiveData<Usuario?>(null)
     val usuarioActual: LiveData<Usuario?> get() = _usuarioActual
 
-    private var _libros: LiveData<List<Libro>> = MutableLiveData()
-    val libros: LiveData<List<Libro>> get() = _libros
-
+    lateinit var libros: LiveData<List<Libro>>
     lateinit var todosLosUsuarios: LiveData<List<Usuario>>
     lateinit var todosLosPrestamos: LiveData<List<PrestamoDetallado>>
 
@@ -60,8 +58,9 @@ class VM(val miRepo: Repositorio) : ViewModel() {
         miRepo.actualizarLibro(libro)
     }
 
-    fun cargarLibros(usuarioID: Int) {
-        _libros = miRepo.cargarLibros(usuarioID).asLiveData()
+    fun cargarLibros() {
+        val usuarioId = usuarioActual.value!!.id
+        libros = miRepo.cargarLibros(usuarioId).asLiveData()
     }
 
     fun getLibro(posicion: Int): Libro? {
@@ -105,10 +104,14 @@ class VM(val miRepo: Repositorio) : ViewModel() {
     fun getPrestamoDetallado(posicion: Int): PrestamoDetallado? =
         todosLosPrestamos.value?.getOrNull(posicion)
 
-    // TODO : Parte funcional de prueba de Logout
-    /*fun logout() {
-        _usuarioActual.postValue(null)
-    }*/
+    // === SESIÓN ===
+
+    fun logout() {
+        _usuarioActual.value = null
+        libros = MutableLiveData(emptyList())
+        todosLosUsuarios = MutableLiveData(emptyList())
+        todosLosPrestamos = MutableLiveData(emptyList())
+    }
 }
 
 class LibreriaViewModelFactory(private val miRepo: Repositorio) : ViewModelProvider.Factory {

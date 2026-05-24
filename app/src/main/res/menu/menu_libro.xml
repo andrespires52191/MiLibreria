@@ -26,7 +26,7 @@
         android:title="@string/ver_prestamos"
         app:showAsAction="never" />
     <item
-        android:id="@+id/volver"
-        android:title="@string/volver"
+        android:id="@+id/cerrar_sesion"
+        android:title="@string/cerrar_sesion"
         app:showAsAction="never" />
 </menu>
