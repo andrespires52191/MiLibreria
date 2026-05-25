@@ -53,7 +53,7 @@ class AdaptadorLibros(
 
                 // Navegar al fragmento de detalle usando el ID de la acción del nav_graph
                 binding.root.findNavController().navigate(
-                    R.id.action_coleccionFragment_to_anadirLibroFragment,
+                    R.id.action_coleccionFragment_to_verLibroFragment,
                     miBundle
                 )
             }

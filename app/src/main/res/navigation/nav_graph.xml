@@ -45,32 +45,25 @@
     </fragment>
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.milibreria.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.milibreria.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/coleccionFragment"
         android:name="com.example.milibreria.ColeccionFragment"
         android:label="@string/titulo_lista_libros"
         tools:layout="@layout/fragment_coleccion">
         <action
             android:id="@+id/action_coleccionFragment_to_anadirLibroFragment"
+            app:destination="@id/anadirLibroFragment" />
+        <action
+            android:id="@+id/action_coleccionFragment_to_verLibroFragment"
+            app:destination="@id/verLibroFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/verLibroFragment"
+        android:name="com.example.milibreria.VerLibroFragment"
+        android:label="@string/titulo_ver_libro"
+        tools:layout="@layout/fragment_ver_libro">
+        <action
+            android:id="@+id/action_verLibroFragment_to_anadirLibroFragment"
             app:destination="@id/anadirLibroFragment" />
     </fragment>
 
@@ -88,6 +81,19 @@
         <action
             android:id="@+id/action_coleccionUsuariosFragment_to_anadirUsuarioFragment"
             app:destination="@id/anadirUsuarioFragment" />
+        <action
+            android:id="@+id/action_coleccionUsuariosFragment_to_verUsuarioFragment"
+            app:destination="@id/verUsuarioFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/verUsuarioFragment"
+        android:name="com.example.milibreria.VerUsuarioFragment"
+        android:label="@string/titulo_ver_usuario"
+        tools:layout="@layout/fragment_ver_usuario">
+        <action
+            android:id="@+id/action_verUsuarioFragment_to_anadirUsuarioFragment"
+            app:destination="@id/anadirUsuarioFragment" />
     </fragment>
 
     <fragment
@@ -103,6 +109,19 @@
         tools:layout="@layout/fragment_coleccion_prestamos">
         <action
             android:id="@+id/action_coleccionPrestamosFragment_to_anadirPrestamoFragment"
+            app:destination="@id/anadirPrestamoFragment" />
+        <action
+            android:id="@+id/action_coleccionPrestamosFragment_to_verPrestamoFragment"
+            app:destination="@id/verPrestamoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/verPrestamoFragment"
+        android:name="com.example.milibreria.VerPrestamoFragment"
+        android:label="@string/titulo_ver_prestamo"
+        tools:layout="@layout/fragment_ver_prestamo">
+        <action
+            android:id="@+id/action_verPrestamoFragment_to_anadirPrestamoFragment"
             app:destination="@id/anadirPrestamoFragment" />
     </fragment>
 

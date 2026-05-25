@@ -46,7 +46,7 @@ class AdaptadorPrestamos(
             binding.root.setOnClickListener {
                 val miBundle = Bundle().apply { putInt("posicion", posicion) }
                 binding.root.findNavController().navigate(
-                    R.id.action_coleccionPrestamosFragment_to_anadirPrestamoFragment,
+                    R.id.action_coleccionPrestamosFragment_to_verPrestamoFragment,
                     miBundle
                 )
             }

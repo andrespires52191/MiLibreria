@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".VerUsuarioFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="32dp">
+
+        <TextView
+            android:id="@+id/tvLabelNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombre_usuario"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/etVerUsuarioNombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:paddingVertical="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelNombreUsuario" />
+
+        <TextView
+            android:id="@+id/tvLabelPasswordUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Contraseña de Acceso"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etVerUsuarioNombre" />
+
+        <TextView
+            android:id="@+id/etVerUsuarioPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:paddingVertical="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelPasswordUsuario" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVolverUsuario"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/volver"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:backgroundTint="#94D1BE"
+            app:cornerRadius="28dp"
+            app:layout_constraintEnd_toStartOf="@id/btnEditarUsuario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etVerUsuarioPassword" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEditarUsuario"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:text="@string/editar"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:backgroundTint="#008566"
+            app:cornerRadius="28dp"
+            app:layout_constraintBottom_toBottomOf="@id/btnVolverUsuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnVolverUsuario"
+            app:layout_constraintTop_toTopOf="@id/btnVolverUsuario" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+

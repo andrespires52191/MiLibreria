@@ -23,6 +23,7 @@
     <string name="cancelar">Cancelar</string>
     <string name="guardar">Guardar</string>
     <string name="volver">Volver</string>
+    <string name="editar">Editar</string>
 
     <!--  LoginFragment  -->
     <string name="imagen_logo">Imagen del logo</string>
@@ -51,10 +52,13 @@
     <string name="titulo_menu_principal">Menú Principal</string>
     <string name="titulo_lista_libros">Lista de Libros</string>
     <string name="titulo_gestionar_libro">Gestionar Libro</string>
+    <string name="titulo_ver_libro">Ver Libro</string>
     <string name="titulo_lista_usuarios">Lista de Usuarios</string>
     <string name="titulo_gestionar_usuario">Gestionar Usuario</string>
+    <string name="titulo_ver_usuario">Ver Usuario</string>
     <string name="titulo_lista_prestamos">Lista de Préstamos</string>
     <string name="titulo_gestionar_prestamo">Gestionar Préstamo</string>
+    <string name="titulo_ver_prestamo">Ver Préstamo</string>
 
     <string name="borrar_libro">Borrar libro</string>
 
