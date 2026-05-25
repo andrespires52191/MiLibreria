@@ -70,27 +70,27 @@ abstract class LibreriaBBDD : RoomDatabase() {
 
                     val librosIniciales = listOf(
                         Libro(
-                            titulo = "titulo_1",
-                            autor = "autor_1",
-                            isbn = "isbn_1",
-                            publicacion = 1999,
-                            valoracion = 4.0,
+                            titulo = "Don Quijote de la Mancha",
+                            autor = "Miguel de Cervantes",
+                            isbn = "9788424116286",
+                            publicacion = 1605,
+                            valoracion = 5.0,
                             usuario_id = userId
                         ),
                         Libro(
-                            titulo = "titulo_2",
-                            autor = "autor_2",
-                            isbn = "isbn_2",
-                            publicacion = 1999,
-                            valoracion = 4.0,
+                            titulo = "Cien años de soledad",
+                            autor = "Gabriel García Márquez",
+                            isbn = "9780307474728",
+                            publicacion = 1967,
+                            valoracion = 4.8,
                             usuario_id = userId
                         ),
                         Libro(
-                            titulo = "titulo_3",
-                            autor = "autor_3",
-                            isbn = "isbn_3",
-                            publicacion = 1999,
-                            valoracion = 4.0,
+                            titulo = "El Principito",
+                            autor = "Antoine de Saint-Exupéry",
+                            isbn = "9780156013925",
+                            publicacion = 1943,
+                            valoracion = 4.9,
                             usuario_id = userId
                         ),
                     )
