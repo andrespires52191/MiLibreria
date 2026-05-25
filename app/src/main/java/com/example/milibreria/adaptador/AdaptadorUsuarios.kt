@@ -42,7 +42,7 @@ class AdaptadorUsuarios(
             binding.root.setOnClickListener {
                 val miBundle = Bundle().apply { putInt("posicion", posicion) }
                 binding.root.findNavController().navigate(
-                    R.id.action_coleccionUsuariosFragment_to_anadirUsuarioFragment,
+                    R.id.action_coleccionUsuariosFragment_to_verUsuarioFragment,
                     miBundle
                 )
             }
