@@ -26,6 +26,9 @@ class AdaptadorUsuarios(
         holder.binding.iutvNombre.text = usuarioActual.nombre
         holder.binding.iutvContrasenia.text = usuarioActual.contrasenia
 
+        // Forzar que la contraseña aparezca como puntos en el TextView
+        holder.binding.iutvContrasenia.transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
+
         // Clic en la papelera de usuarios
         holder.binding.btnBorrarUsuario.setOnClickListener {
             onBorrarClick(usuarioActual)
