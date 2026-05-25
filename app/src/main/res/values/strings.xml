@@ -23,7 +23,6 @@
     <string name="cancelar">Cancelar</string>
     <string name="guardar">Guardar</string>
     <string name="volver">Volver</string>
-    <string name="cerrar_sesion">Cerrar Sesión</string>
 
     <!--  LoginFragment  -->
     <string name="imagen_logo">Imagen del logo</string>
@@ -36,6 +35,7 @@
 
     <!--  AnadirUsuarioFragment  -->
     <string name="nombre_usuario">Nombre de Usuario</string>
+    <!-- TODO : Poner los demás -->
 
     <!--  MenuLibroFragment  -->
     <string name="anadir_libro">Añadir Libro</string>
@@ -44,6 +44,7 @@
     <string name="ver_usuarios">Ver Usuarios</string>
     <string name="anadir_prestamo">Nuevo Préstamo</string>
     <string name="ver_prestamos">Ver Préstamos</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
 
     <!-- Labels para los Fragmentos (Navigation) -->
     <string name="titulo_login">Iniciar Sesión</string>

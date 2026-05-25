@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -62,12 +63,10 @@ class ColeccionPrestamosFragment : Fragment() {
         miViewModel.cargarPrestamos()
         miViewModel.todosLosPrestamos.observe(viewLifecycleOwner) { listaPrestamos ->
             if (listaPrestamos != null) {
-                binding.rvColeccionPrestamos.adapter = AdaptadorPrestamos(listaPrestamos) { posicion ->
-                    val bundle = bundleOf("posicion" to posicion)
-                    findNavController().navigate(
-                        R.id.action_coleccionPrestamosFragment_to_anadirPrestamoFragment,
-                        bundle
-                    )
+                // Pasar la lista detallada y capturar el evento de eliminación de la papelera
+                binding.rvColeccionPrestamos.adapter = AdaptadorPrestamos(listaPrestamos.toMutableList()) { prestamoAEliminar ->
+                    miViewModel.eliminarPrestamo(prestamoAEliminar)
+                    Toast.makeText(requireContext(), "Préstamo eliminado con éxito", Toast.LENGTH_SHORT).show()
                 }
             }
         }

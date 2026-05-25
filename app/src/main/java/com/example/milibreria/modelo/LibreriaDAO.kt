@@ -43,6 +43,9 @@ interface LibreriaDAO {
     @Query("SELECT * FROM usuario WHERE nombre = :usuario AND contrasenia = :contrasenia")
     fun autenticar(usuario: String, contrasenia: String): Flow<Usuario?>
 
+    @Delete
+    fun eliminarUsuario(usuario: Usuario)
+
     // === PRÉSTAMOS ===
 
     @Insert
@@ -54,4 +57,7 @@ interface LibreriaDAO {
     @Transaction
     @Query("SELECT * FROM prestamo")
     fun cargarPrestamos(): Flow<List<PrestamoDetallado>>
+
+    @Delete
+    fun eliminarPrestamo(prestamo: Prestamo)
 }

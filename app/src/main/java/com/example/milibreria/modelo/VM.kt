@@ -87,6 +87,10 @@ class VM(val miRepo: Repositorio) : ViewModel() {
 
     fun getUsuario(posicion: Int): Usuario? = todosLosUsuarios.value?.getOrNull(posicion)
 
+    fun eliminarUsuario(usuario: Usuario) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.eliminarUsuario(usuario)
+    }
+
     // === PRÉSTAMOS ===
 
     fun insertarPrestamo(prestamo: Prestamo) = viewModelScope.launch(Dispatchers.IO) {
@@ -103,6 +107,10 @@ class VM(val miRepo: Repositorio) : ViewModel() {
 
     fun getPrestamoDetallado(posicion: Int): PrestamoDetallado? =
         todosLosPrestamos.value?.getOrNull(posicion)
+
+    fun eliminarPrestamo(prestamo: Prestamo) = viewModelScope.launch(Dispatchers.IO) {
+        miRepo.eliminarPrestamo(prestamo)
+    }
 
     // === SESIÓN ===
 

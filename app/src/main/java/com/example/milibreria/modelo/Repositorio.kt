@@ -42,6 +42,10 @@ class Repositorio(val miDao: LibreriaDAO) {
         return miDao.autenticar(usuario, contrasenia)
     }
 
+    suspend fun eliminarUsuario(usuario: Usuario) {
+        miDao.eliminarUsuario(usuario)
+    }
+
     // === PRÉSTAMOS ===
 
     suspend fun insertarPrestamo(prestamo: Prestamo) = miDao.insertarPrestamo(prestamo)
@@ -49,4 +53,8 @@ class Repositorio(val miDao: LibreriaDAO) {
     suspend fun actualizarPrestamo(prestamo: Prestamo) = miDao.actualizarPrestamo(prestamo)
 
     fun cargarPrestamos(): Flow<List<PrestamoDetallado>> = miDao.cargarPrestamos()
+
+    suspend fun eliminarPrestamo(prestamo: Prestamo) {
+        miDao.eliminarPrestamo(prestamo)
+    }
 }

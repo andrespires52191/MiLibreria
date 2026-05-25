@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -48,10 +49,12 @@ class ColeccionUsuariosFragment : Fragment() {
                         anadirUsuario()
                         true
                     }
+
                     R.id.volver -> {
                         volver()
                         true
                     }
+
                     else -> false
                 }
             }
@@ -62,13 +65,15 @@ class ColeccionUsuariosFragment : Fragment() {
         miViewModel.cargarUsuarios()
         miViewModel.todosLosUsuarios.observe(viewLifecycleOwner) { listaUsuarios ->
             if (listaUsuarios != null) {
-                binding.rvColeccionUsuarios.adapter = AdaptadorUsuarios(listaUsuarios) { posicion ->
-                    val bundle = bundleOf("posicion" to posicion)
-                    findNavController().navigate(
-                        R.id.action_coleccionUsuariosFragment_to_anadirUsuarioFragment,
-                        bundle
-                    )
-                }
+                // Pasamos la lista y la acción de eliminar
+                binding.rvColeccionUsuarios.adapter =
+                    AdaptadorUsuarios(listaUsuarios.toMutableList()) { usuarioAEliminar ->
+                        miViewModel.eliminarUsuario(usuarioAEliminar)
+                        Toast.makeText(
+                            requireContext(),
+                            "Usuario [${usuarioAEliminar.nombre}] eliminado", Toast.LENGTH_SHORT
+                        ).show()
+                    }
             }
         }
 
