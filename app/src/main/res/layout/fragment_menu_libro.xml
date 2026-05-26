@@ -66,7 +66,7 @@
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:backgroundTint="#3F51B5"
+            app:backgroundTint="#004DDB"
             app:cornerRadius="16dp"
             app:layout_constraintEnd_toStartOf="@id/btnMenuVerUsuarios"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +81,7 @@
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:backgroundTint="#3F51B5"
+            app:backgroundTint="#004DDB"
             app:cornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="@id/btnMenuAnadirUsuario"
             app:layout_constraintEnd_toEndOf="parent"
@@ -119,22 +119,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnMenuAnadirPrestamo"
             app:layout_constraintTop_toTopOf="@id/btnMenuAnadirPrestamo" />
-
-        <!-- TODO : Parte funcional de prueba de Logout -->
-        <!--<com.google.android.material.button.MaterialButton
-            android:id="@+id/btnMenuLogout"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="32dp"
-            android:text="Cerrar Sesión"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:backgroundTint="#D32F2F"
-            app:cornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnMenuAnadirPrestamo" />-->
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

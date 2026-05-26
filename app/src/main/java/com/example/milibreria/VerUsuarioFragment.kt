@@ -62,10 +62,12 @@ class VerUsuarioFragment : Fragment() {
         posicion = arguments?.getInt("posicion") ?: -1
 
         if (posicion != -1) {
-            val usuario = miViewModel.todosLosUsuarios.value?.getOrNull(posicion)
-            usuario?.let {
-                binding.etVerUsuarioNombre.setText(it.nombre)
-                binding.etVerUsuarioPassword.setText(it.contrasenia)
+            miViewModel.todosLosUsuarios.observe(viewLifecycleOwner) { listaUsuarios ->
+                val usuario = listaUsuarios?.getOrNull(posicion)
+                usuario?.let {
+                    binding.etVerUsuarioNombre.setText(it.nombre)
+                    binding.etVerUsuarioPassword.setText(it.contrasenia)
+                }
             }
         }
 

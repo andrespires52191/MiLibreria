@@ -1,3 +1,5 @@
+/* TODO : Revisar "usuarioId" */
+
 package com.example.milibreria.modelo
 
 import androidx.lifecycle.LiveData

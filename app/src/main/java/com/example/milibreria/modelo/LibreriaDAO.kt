@@ -1,3 +1,5 @@
+/* TODO : Revisar "usuario_id" */
+
 package com.example.milibreria.modelo
 
 import androidx.room.Dao

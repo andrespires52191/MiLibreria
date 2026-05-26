@@ -62,12 +62,15 @@ class VerPrestamoFragment : Fragment() {
         posicion = arguments?.getInt("posicion") ?: -1
 
         if (posicion != -1) {
-            val prestamoDetalle = miViewModel.getPrestamoDetallado(posicion)
-            prestamoDetalle?.let {
-                binding.etVerPrestamoLibro.setText(it.libro?.titulo ?: "Desconocido")
-                binding.etVerPrestamoUsuario.setText(it.usuario?.nombre ?: "Desconocido")
-                binding.etVerFechaInicio.setText(it.prestamo.fechaInicio)
-                binding.etVerFechaFin.setText(it.prestamo.fechaFin)
+            // Observar la lista en tiempo real para enterarnos de los cambios al volver de editar
+            miViewModel.todosLosPrestamos.observe(viewLifecycleOwner) { listaPrestamos ->
+                val prestamoDetalle = listaPrestamos?.getOrNull(posicion)
+                prestamoDetalle?.let {
+                    binding.etVerPrestamoLibro.setText(it.libro?.titulo ?: "Desconocido")
+                    binding.etVerPrestamoUsuario.setText(it.usuario?.nombre ?: "Desconocido")
+                    binding.etVerFechaInicio.setText(it.prestamo.fechaInicio)
+                    binding.etVerFechaFin.setText(it.prestamo.fechaFin)
+                }
             }
         }
 

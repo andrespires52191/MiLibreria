@@ -38,10 +38,6 @@
         <action
             android:id="@+id/action_menuLibroFragment_to_coleccionPrestamosFragment"
             app:destination="@id/coleccionPrestamosFragment" />
-        <!-- TODO : Parte funcional de prueba de Logout -->
-        <!--<action
-            android:id="@+id/action_menuLibroFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />-->
     </fragment>
 
     <fragment
