@@ -102,33 +102,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etDetalleIsbn" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilDetallePublicacion"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <EditText
+            android:id="@+id/etDetallePublicacion"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input_border"
-            app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
-            app:endIconMode="custom"
-            app:hintEnabled="false"
+            android:clickable="true"
+            android:focusable="true"
+            android:hint="@string/ejemplo_anio"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:paddingHorizontal="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLabelDetallePublicacion">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etDetallePublicacion"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:clickable="true"
-                android:focusable="false"
-                android:hint="@string/hint_seleccionar_fecha"
-                android:importantForAutofill="no"
-                android:inputType="none"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="0dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@id/tvLabelDetallePublicacion" />
 
         <TextView
             android:id="@+id/tvLabelValoracion"
@@ -140,7 +128,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilDetallePublicacion" />
+            app:layout_constraintTop_toBottomOf="@id/etDetallePublicacion" />
 
         <EditText
             android:id="@+id/etDetalleValoracion"

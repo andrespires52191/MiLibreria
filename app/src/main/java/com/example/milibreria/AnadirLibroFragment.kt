@@ -1,23 +1,22 @@
 package com.example.milibreria
 
-import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.milibreria.databinding.FragmentAnadirLibroBinding
 import com.example.milibreria.modelo.Libro
 import com.example.milibreria.modelo.VM
-import java.util.Calendar
 
 class AnadirLibroFragment : Fragment() {
 
@@ -41,6 +40,7 @@ class AnadirLibroFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Configuración del menú superior (Guardar / Cancelar desde la Toolbar)
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -53,14 +53,16 @@ class AnadirLibroFragment : Fragment() {
                         guardarLibro()
                         true
                     }
+
                     R.id.action_cancelar -> {
                         cancelar()
                         true
                     }
+
                     else -> false
                 }
             }
-        },viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         // Si no se recibe posición, el valor por defecto será "-1" (Modo Añadir)
         posicion = arguments?.getInt("posicion") ?: -1
@@ -78,21 +80,14 @@ class AnadirLibroFragment : Fragment() {
             )
         }
 
+        // Rellenar los campos con los datos del libro (vacíos si es un libro nuevo)
         binding.etDetalleTitulo.setText(libro.titulo)
         binding.etDetalleAutor.setText(libro.autor)
         binding.etDetalleIsbn.setText(libro.isbn)
         binding.etDetallePublicacion.setText(libro.publicacion?.toString() ?: "")
         binding.etDetalleValoracion.setText(libro.valoracion?.toString() ?: "")
 
-        // Configuración para abrir el Calendario (Tanto al pulsar el texto como el icono lateral)
-        binding.etDetallePublicacion.setOnClickListener {
-            abrirCalendarioAnio()
-        }
-        binding.tilDetallePublicacion.setEndIconOnClickListener {
-            abrirCalendarioAnio()
-        }
-
-        // Botón Cancelar: Vuelve atrás sin guardar cambios
+        // Botón Cancelar
         binding.btnCancelar.setOnClickListener {
             cancelar()
         }
@@ -103,33 +98,29 @@ class AnadirLibroFragment : Fragment() {
         }
     }
 
-    private fun abrirCalendarioAnio() {
-        val calendar = Calendar.getInstance()
-        val anioActual = calendar.get(Calendar.YEAR)
-        val mesActual = calendar.get(Calendar.MONTH)
-        val diaActual = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePicker = DatePickerDialog(requireContext(), { _, year, _, _ ->
-            // Guardar únicamente el año seleccionado
-            binding.etDetallePublicacion.setText(year.toString())
-        }, anioActual, mesActual, diaActual)
-
-        datePicker.show()
-    }
-
     private fun guardarLibro() {
-        libro.titulo = binding.etDetalleTitulo.text.toString()
-        libro.autor = binding.etDetalleAutor.text.toString()
-        libro.isbn = binding.etDetalleIsbn.text.toString()
+        val tituloText = binding.etDetalleTitulo.text.toString().trim()
+
+        // Validación básica obligatoria: El título no puede estar vacío
+        if (tituloText.isEmpty()) {
+            Toast.makeText(requireContext(), "El título es obligatorio", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        libro.titulo = tituloText
+        libro.autor = binding.etDetalleAutor.text.toString().trim().takeIf { it.isNotEmpty() }
+        libro.isbn = binding.etDetalleIsbn.text.toString().trim().takeIf { it.isNotEmpty() }
+
+        // Conversión directa a Int del año tecleado por el usuario
         libro.publicacion = binding.etDetallePublicacion.text.toString().toIntOrNull()
         libro.valoracion = binding.etDetalleValoracion.text.toString().toDoubleOrNull()
 
         if (posicion != -1) {
-            // Modo Edición: Modifica el libro existente en la lista
-            (activity as MainActivity).miViewModel.actualizarLibro(libro)
+            // Modo Edición: Modifica el libro existente en la base de datos
+            miViewModel.actualizarLibro(libro)
         } else {
-            // Modo Añadir: Agrega el nuevo libro al ViewModel
-            (activity as MainActivity).miViewModel.insertarLibro(libro)
+            // Modo Añadir: Agrega el nuevo libro a la base de datos
+            miViewModel.insertarLibro(libro)
         }
 
         // Regresa a la pantalla anterior del flujo de navegación
@@ -144,5 +135,4 @@ class AnadirLibroFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
