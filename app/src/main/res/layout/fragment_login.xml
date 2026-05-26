@@ -14,11 +14,11 @@
         android:layout_marginTop="24dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/imagen_logo"
-        android:src="@android:drawable/ic_menu_gallery"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@android:drawable/ic_menu_gallery" />
+        tools:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/tvLabelUsuario"

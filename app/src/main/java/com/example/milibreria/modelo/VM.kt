@@ -26,6 +26,10 @@ class VM(val miRepo: Repositorio) : ViewModel() {
     // === AUTENTICACIÓN Y REGISTRO ===
 
     fun autentificar(usuario: String, contrasenia: String) =
+        /**
+         * Dispatchers.IO es un objeto CoroutineDispatcher que arranca la corrutina en un hilo secundario,
+         * evitando congelar la interfaz al consultar Room y usando postValue para actualizar el LiveData.
+         */
         viewModelScope.launch(Dispatchers.IO) {
             miRepo.autenticar(usuario, contrasenia).collect { usuarioLogueado ->
                 _usuarioActual.postValue(usuarioLogueado)
