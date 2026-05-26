@@ -22,14 +22,14 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-<!-- TODO : Me falta poner en el 'strings.xml' lo demás de los warnings -->
+
         <EditText
             android:id="@+id/etUsuarioNombre"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input_border"
-            android:hint="Ej. Juan Pérez"
+            android:hint="@string/ejemplo_nombre_usuario"
             android:importantForAutofill="no"
             android:inputType="textPersonName|textCapWords"
             android:paddingHorizontal="12dp"
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Contraseña de Acceso"
+            android:text="@string/contrasena_acceso"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -55,7 +55,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input_border"
-            android:hint="Introduce la contraseña"
+            android:hint="@string/contrasena_acceso_hint"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:paddingHorizontal="12dp"

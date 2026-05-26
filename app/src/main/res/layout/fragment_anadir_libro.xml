@@ -91,7 +91,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvLabelIsbn" />
 
         <TextView
-            android:id="@+id/tvLabelPublicacion"
+            android:id="@+id/tvLabelDetallePublicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -102,33 +102,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etDetalleIsbn" />
 
-        <EditText
-            android:id="@+id/etDetallePublicacion"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDetallePublicacion"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="12dp"
             android:background="@drawable/bg_input_border"
-            android:focusable="false"
-            android:hint="@string/anio_hint"
-            android:importantForAutofill="no"
-            android:inputType="none"
-            android:paddingHorizontal="12dp"
-            app:layout_constraintEnd_toStartOf="@id/btnCalendario"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLabelPublicacion" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnCalendario"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="#008566"
-            android:contentDescription="@string/fecha"
-            android:src="@android:drawable/ic_menu_my_calendar"
-            android:tint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@id/etDetallePublicacion"
+            app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+            app:endIconMode="custom"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/etDetallePublicacion" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelDetallePublicacion">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDetallePublicacion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="@string/hint_seleccionar_fecha"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="0dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tvLabelValoracion"
@@ -140,7 +140,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etDetallePublicacion" />
+            app:layout_constraintTop_toBottomOf="@id/tilDetallePublicacion" />
 
         <EditText
             android:id="@+id/etDetalleValoracion"

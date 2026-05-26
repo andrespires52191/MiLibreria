@@ -11,12 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="32dp">
-        <!-- TODO : Me falta poner en el 'strings.xml' lo de los warnings -->
+
         <TextView
             android:id="@+id/tvLabelSelectorLibro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Seleccionar Libro"
+            android:text="@string/label_selector_libro"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Asignar al Usuario"
+            android:text="@string/label_selector_usuario"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -60,52 +60,80 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Fecha de Inicio"
+            android:text="@string/label_fecha_inicio"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinnerUsuarios" />
 
-        <EditText
-            android:id="@+id/etFechaInicio"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFechaInicio"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input_border"
-            android:focusable="false"
-            android:hint="Seleccionar fecha"
-            android:inputType="none"
-            android:paddingHorizontal="12dp"
+            app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+            app:endIconMode="custom"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLabelFechaInicio" />
+            app:layout_constraintTop_toBottomOf="@id/tvLabelFechaInicio">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFechaInicio"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="@string/hint_seleccionar_fecha"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="0dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tvLabelFechaFin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Fecha de Devolución"
+            android:text="@string/label_fecha_fin"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etFechaInicio" />
+            app:layout_constraintTop_toBottomOf="@id/tilFechaInicio" />
 
-        <EditText
-            android:id="@+id/etFechaFin"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFechaFin"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input_border"
-            android:focusable="false"
-            android:hint="Seleccionar fecha"
-            android:inputType="none"
-            android:paddingHorizontal="12dp"
+            app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+            app:endIconMode="custom"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLabelFechaFin" />
+            app:layout_constraintTop_toBottomOf="@id/tvLabelFechaFin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFechaFin"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="@string/hint_seleccionar_fecha"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="0dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelarPrestamo"
@@ -120,7 +148,7 @@
             app:cornerRadius="28dp"
             app:layout_constraintEnd_toStartOf="@id/btnGuardarPrestamo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etFechaFin" />
+            app:layout_constraintTop_toBottomOf="@id/tilFechaFin" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardarPrestamo"

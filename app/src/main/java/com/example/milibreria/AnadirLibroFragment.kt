@@ -84,19 +84,12 @@ class AnadirLibroFragment : Fragment() {
         binding.etDetallePublicacion.setText(libro.publicacion?.toString() ?: "")
         binding.etDetalleValoracion.setText(libro.valoracion?.toString() ?: "")
 
-        // Configuración del botón para abrir el Calendario (DatePickerDialog)
-        binding.btnCalendario.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val anioActual = calendar.get(Calendar.YEAR)
-            val mesActual = calendar.get(Calendar.MONTH)
-            val diaActual = calendar.get(Calendar.DAY_OF_MONTH)
-
-            val datePicker = DatePickerDialog(requireContext(), { _, year, _, _ ->
-                // Guardar únicamente el año seleccionado
-                binding.etDetallePublicacion.setText(year.toString())
-            }, anioActual, mesActual, diaActual)
-
-            datePicker.show()
+        // Configuración para abrir el Calendario (Tanto al pulsar el texto como el icono lateral)
+        binding.etDetallePublicacion.setOnClickListener {
+            abrirCalendarioAnio()
+        }
+        binding.tilDetallePublicacion.setEndIconOnClickListener {
+            abrirCalendarioAnio()
         }
 
         // Botón Cancelar: Vuelve atrás sin guardar cambios
@@ -108,6 +101,20 @@ class AnadirLibroFragment : Fragment() {
         binding.btnGuardar.setOnClickListener {
             guardarLibro()
         }
+    }
+
+    private fun abrirCalendarioAnio() {
+        val calendar = Calendar.getInstance()
+        val anioActual = calendar.get(Calendar.YEAR)
+        val mesActual = calendar.get(Calendar.MONTH)
+        val diaActual = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePicker = DatePickerDialog(requireContext(), { _, year, _, _ ->
+            // Guardar únicamente el año seleccionado
+            binding.etDetallePublicacion.setText(year.toString())
+        }, anioActual, mesActual, diaActual)
+
+        datePicker.show()
     }
 
     private fun guardarLibro() {

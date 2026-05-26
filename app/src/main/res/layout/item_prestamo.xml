@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="?attr/materialCardViewElevatedStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -22,20 +23,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <!-- TODO : Me falta poner en el 'strings.xml' lo de los warnings -->
+
         <TextView
             android:id="@+id/iptvLibroTitulo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="8dp"
-            android:text="Título del Libro"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/btnBorrarPrestamo"
             app:layout_constraintStart_toEndOf="@id/ivPrestamoThumb"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Título del Libro" />
 
         <TextView
             android:id="@+id/iptvUsuarioNombre"
@@ -44,7 +45,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:text="Prestado a: "
+            android:text="@string/prestado_a"
             android:textColor="#555555"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@id/btnBorrarPrestamo"
@@ -58,21 +59,21 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:text="00/00/0000 hasta 00/00/0000"
             android:textColor="#008566"
             android:textSize="13sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnBorrarPrestamo"
             app:layout_constraintStart_toEndOf="@id/ivPrestamoThumb"
-            app:layout_constraintTop_toBottomOf="@id/iptvUsuarioNombre" />
+            app:layout_constraintTop_toBottomOf="@id/iptvUsuarioNombre"
+            tools:text="00/00/0000 hasta 00/00/0000" />
 
         <ImageView
             android:id="@+id/btnBorrarPrestamo"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Borrar préstamo"
+            android:contentDescription="@string/borrar_prestamo"
             android:padding="8dp"
             android:src="@android:drawable/ic_menu_delete"
             app:layout_constraintBottom_toBottomOf="parent"

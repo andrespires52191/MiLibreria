@@ -128,9 +128,23 @@ class AnadirPrestamoFragment : Fragment() {
             }
         }
 
-        // 3. Configurar los DatePickers de las fechas (Igual que hicisteis con publicación)
-        binding.etFechaInicio.setOnClickListener { mostrarDatePicker { fecha -> binding.etFechaInicio.setText(fecha) } }
-        binding.etFechaFin.setOnClickListener { mostrarDatePicker { fecha -> binding.etFechaFin.setText(fecha) } }
+        // 3. Configurar los DatePickers de las fechas (Tanto al pulsar el texto como el icono lateral)
+
+        // Control para la Fecha de Inicio
+        binding.etFechaInicio.setOnClickListener {
+            mostrarDatePicker { fecha -> binding.etFechaInicio.setText(fecha) }
+        }
+        binding.tilFechaInicio.setEndIconOnClickListener {
+            mostrarDatePicker { fecha -> binding.etFechaInicio.setText(fecha) }
+        }
+
+        // Control para la Fecha de Fin
+        binding.etFechaFin.setOnClickListener {
+            mostrarDatePicker { fecha -> binding.etFechaFin.setText(fecha) }
+        }
+        binding.tilFechaFin.setEndIconOnClickListener {
+            mostrarDatePicker { fecha -> binding.etFechaFin.setText(fecha) }
+        }
 
         // 4. Botón Cancelar
         binding.btnCancelarPrestamo.setOnClickListener {
