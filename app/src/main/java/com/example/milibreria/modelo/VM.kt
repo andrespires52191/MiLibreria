@@ -63,8 +63,7 @@ class VM(val miRepo: Repositorio) : ViewModel() {
     }
 
     fun cargarLibros() {
-        val usuarioId = usuarioActual.value!!.id
-        libros = miRepo.cargarLibros(usuarioId).asLiveData()
+        libros = miRepo.cargarLibros().asLiveData()
     }
 
     fun getLibro(posicion: Int): Libro? {

@@ -99,7 +99,7 @@ abstract class LibreriaBBDD : RoomDatabase() {
 
                     // --- AÑADIR PRÉSTAMOS INICIALES DE PRUEBA (Para instalaciones desde cero) ---
                     // Recuperar el ID del primer libro que se acaba de insertar para no romper la clave foránea
-                    val librosInsertados = INSTANCE?.libreriaDAO?.cargarLibros(userId)?.first()
+                    val librosInsertados = INSTANCE?.libreriaDAO?.cargarLibros()?.first()
                     val libroId = librosInsertados?.firstOrNull()?.id ?: 0
 
                     if (libroId != 0) {

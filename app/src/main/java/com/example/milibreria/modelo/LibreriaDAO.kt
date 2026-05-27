@@ -20,8 +20,8 @@ interface LibreriaDAO {
     @Update
     fun actualizarLibro(libro: Libro)
 
-    @Query("SELECT * FROM libro WHERE usuario_id = :usuarioId ORDER BY titulo")
-    fun cargarLibros(usuarioId: Int): Flow<List<Libro>>
+    @Query("SELECT * FROM libro ORDER BY titulo")
+    fun cargarLibros(): Flow<List<Libro>>
 
     @Delete
     fun eliminarLibro(libro: Libro)

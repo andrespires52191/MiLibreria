@@ -16,8 +16,8 @@ class Repositorio(val miDao: LibreriaDAO) {
         miDao.actualizarLibro(libro)
     }
 
-    fun cargarLibros(usuarioId: Int): Flow<List<Libro>> {
-        return miDao.cargarLibros(usuarioId)
+    fun cargarLibros(): Flow<List<Libro>> {
+        return miDao.cargarLibros()
     }
 
     suspend fun eliminarLibro(libro: Libro) {
