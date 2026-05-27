@@ -57,6 +57,7 @@ class ColeccionFragment : Fragment() {
                         anadirLibro()
                         true
                     }
+
                     R.id.volver -> {
                         volver()
                         true
@@ -67,11 +68,19 @@ class ColeccionFragment : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
+        miViewModel.errorBorrado.observe(viewLifecycleOwner) { mensaje ->
+            mensaje?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                miViewModel.errorBorrado.value = null // Limpiar error
+            }
+        }
+
         binding.cfrvColeccion.layoutManager =
             androidx.recyclerview.widget.LinearLayoutManager(activity)
 
         // Cargar los libros y observar los cambios
         miViewModel.cargarLibros()
+
         miViewModel.libros.observe(viewLifecycleOwner) { libros ->
             // Pasar la lista y el bloque de código que se activará al clicar en la papelera
             binding.cfrvColeccion.adapter =

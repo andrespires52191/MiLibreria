@@ -20,6 +20,7 @@ class VM(val miRepo: Repositorio) : ViewModel() {
     lateinit var todosLosPrestamos: LiveData<List<PrestamoDetallado>>
 
     val mensajeRegistro = MutableLiveData<String?>()
+    val errorBorrado = MutableLiveData<String?>()
 
     // === AUTENTICACIÓN Y REGISTRO ===
 
@@ -71,7 +72,11 @@ class VM(val miRepo: Repositorio) : ViewModel() {
     }
 
     fun eliminarLibro(libro: Libro) = viewModelScope.launch(Dispatchers.IO) {
-        miRepo.eliminarLibro(libro)
+        try {
+            miRepo.eliminarLibro(libro)
+        } catch (e: Exception) {
+            errorBorrado.postValue("No se puede eliminar: tiene préstamos activos")
+        }
     }
 
     // === USUARIOS ===
@@ -91,7 +96,11 @@ class VM(val miRepo: Repositorio) : ViewModel() {
     fun getUsuario(posicion: Int): Usuario? = todosLosUsuarios.value?.getOrNull(posicion)
 
     fun eliminarUsuario(usuario: Usuario) = viewModelScope.launch(Dispatchers.IO) {
-        miRepo.eliminarUsuario(usuario)
+        try {
+            miRepo.eliminarUsuario(usuario)
+        } catch (e: Exception) {
+            errorBorrado.postValue("No se puede eliminar: el usuario tiene préstamos activos")
+        }
     }
 
     // === PRÉSTAMOS ===

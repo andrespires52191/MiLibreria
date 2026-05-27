@@ -60,6 +60,13 @@ class ColeccionUsuariosFragment : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
+        miViewModel.errorBorrado.observe(viewLifecycleOwner) { mensaje ->
+            mensaje?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                miViewModel.errorBorrado.value = null
+            }
+        }
+
         binding.rvColeccionUsuarios.layoutManager = LinearLayoutManager(requireContext())
 
         miViewModel.cargarUsuarios()

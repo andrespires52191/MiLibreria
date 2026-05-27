@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,8 +11,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.first
 
 @Database(
-    entities = [Usuario::class, Libro::class, Prestamo::class],
-    version = 3,
+    entities = [
+        Usuario::class,
+        Libro::class,
+        Prestamo::class
+    ],
+    version = 1,
     exportSchema = false
 )
 abstract class LibreriaBBDD : RoomDatabase() {
@@ -23,25 +26,6 @@ abstract class LibreriaBBDD : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: LibreriaBBDD? = null
-
-        // --- DEFINICIÓN DE LA MIGRACIÓN ---
-        private val MIGRATION_1_2 = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL(
-                    """
-                    CREATE TABLE IF NOT EXISTS `Prestamo` (
-                        `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
-                        `libro_id` INTEGER NOT NULL, 
-                        `usuario_id` INTEGER NOT NULL, 
-                        `fechaInicio` TEXT NOT NULL, 
-                        `fechaFin` TEXT NOT NULL, 
-                        FOREIGN KEY(`libro_id`) REFERENCES `Libro`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, 
-                        FOREIGN KEY(`usuario_id`) REFERENCES `Usuario`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION 
-                    )
-                """.trimIndent()
-                )
-            }
-        }
 
         // Callback que se ejecuta cuando se crea la base de datos
         private val roomCallback = object : RoomDatabase.Callback() {
@@ -123,8 +107,8 @@ abstract class LibreriaBBDD : RoomDatabase() {
                     LibreriaBBDD::class.java,
                     "libreria_db"
                 )
-                    .addMigrations(MIGRATION_1_2)
                     .addCallback(roomCallback)
+                    .fallbackToDestructiveMigration()
                     .build().also {
                         INSTANCE = it
                     }

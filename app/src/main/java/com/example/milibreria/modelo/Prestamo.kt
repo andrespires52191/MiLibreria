@@ -9,12 +9,14 @@ import androidx.room.PrimaryKey
         ForeignKey(
             entity = Usuario::class,
             parentColumns = ["id"],
-            childColumns = ["usuario_id"]
+            childColumns = ["usuario_id"],
+            onDelete = ForeignKey.RESTRICT
         ),
         ForeignKey(
             entity = Libro::class,
             parentColumns = ["id"],
-            childColumns = ["libro_id"]
+            childColumns = ["libro_id"],
+            onDelete = ForeignKey.RESTRICT
         )
     ]
 )
