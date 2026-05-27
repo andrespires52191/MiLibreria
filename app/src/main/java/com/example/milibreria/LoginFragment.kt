@@ -54,8 +54,10 @@ class LoginFragment : Fragment() {
             val contrasenia = binding.etLoginPassword.text.toString().trim()
 
             if (usuario.isEmpty() || contrasenia.isEmpty()) {
-                Toast.makeText(requireContext(), "Rellena todos los campos.",
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(), "Rellena todos los campos.",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 (activity as MainActivity).miViewModel.autentificar(usuario, contrasenia)
             }
@@ -63,34 +65,45 @@ class LoginFragment : Fragment() {
 
         // Botón para Registrarse y también Iniciar Sesión
         binding.btnRegistrarAhora.setOnClickListener {
-            val usuario = binding.etLoginUsuario.text.toString().trim()
+            val campoUsuario = binding.etLoginUsuario.text.toString().trim()
             val contrasenia = binding.etLoginPassword.text.toString().trim()
 
-            if (usuario.isEmpty() || contrasenia.isEmpty()) {
+            if (campoUsuario.isEmpty() || contrasenia.isEmpty()) {
                 Toast.makeText(
                     requireContext(),
                     "Introduce usuario y contraseña para registrarte.",
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                val usuarioNuevo = Usuario(nombre = usuario, contrasenia = contrasenia)
+                val usuarioNuevo = Usuario(
+                    id = 0,
+                    nombre = campoUsuario,
+                    apellido1 = "",
+                    apellido2 = "",
+                    telefono = "",
+                    admin = true, // Poner 'true' para que se cree como admin y pueda volver a loguearse
+                    usuario = campoUsuario,
+                    contrasenia = contrasenia
+                )
                 (activity as MainActivity).miViewModel.registrarYAutentificar(usuarioNuevo)
             }
         }
     }
 
     private fun observarAutentificacion() {
-        (activity as MainActivity).miViewModel.usuarioActual.observe(viewLifecycleOwner) {
-            usuarioActual ->
+        (activity as MainActivity).miViewModel.usuarioActual.observe(viewLifecycleOwner) { usuarioActual ->
             if (usuarioActual != null) {
                 // Navegar inmediatamente al menú principal
                 findNavController().navigate(R.id.action_loginFragment_to_menuLibroFragment)
             } else {
                 // Solo mostrar error si el usuario ha intentado escribir algo
                 if (binding.etLoginUsuario.text.isNotEmpty() &&
-                    binding.etLoginPassword.text.isNotEmpty()) {
-                    Toast.makeText(requireContext(), "Credenciales incorrectas",
-                        Toast.LENGTH_LONG)
+                    binding.etLoginPassword.text.isNotEmpty()
+                ) {
+                    Toast.makeText(
+                        requireContext(), "Credenciales incorrectas",
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 }
             }
@@ -98,11 +111,12 @@ class LoginFragment : Fragment() {
     }
 
     private fun observarRegistro() {
-        (activity as MainActivity).miViewModel.mensajeRegistro.observe(viewLifecycleOwner) {
-            mensaje ->
+        (activity as MainActivity).miViewModel.mensajeRegistro.observe(viewLifecycleOwner) { mensaje ->
             if (mensaje != null) {
-                Toast.makeText(requireContext(), mensaje,
-                    Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(), mensaje,
+                    Toast.LENGTH_LONG
+                ).show()
                 // Limpiar el LiveData una vez mostrado el Toast de aviso para que no repita
                 (activity as MainActivity).miViewModel.mensajeRegistro.value = null
             }

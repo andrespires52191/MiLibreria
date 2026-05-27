@@ -27,7 +27,6 @@ class Prestamo(
 )
 
 
-
 /* Prueba de relación N:M entre Usuario y Libro */
 
 /*

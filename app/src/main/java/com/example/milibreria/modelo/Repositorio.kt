@@ -1,5 +1,3 @@
-/* TODO : Revisar "usuarioId" */
-
 package com.example.milibreria.modelo
 
 import com.example.milibreria.modelo.relaciones.PrestamoDetallado

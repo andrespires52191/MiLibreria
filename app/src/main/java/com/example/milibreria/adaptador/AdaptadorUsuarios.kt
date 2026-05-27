@@ -23,11 +23,13 @@ class AdaptadorUsuarios(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val usuarioActual = lista[position]
         holder.posicion = position
-        holder.binding.iutvNombre.text = usuarioActual.nombre
-        holder.binding.iutvContrasenia.text = usuarioActual.contrasenia
 
-        // Forzar que la contraseña aparezca como puntos en el TextView
-        holder.binding.iutvContrasenia.transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
+        // Mostrar Nombre + Apellidos
+        holder.binding.iutvNombre.text =
+            "${usuarioActual.nombre} ${usuarioActual.apellido1} ${usuarioActual.apellido2}"
+
+        // Mostrar el nombre de usuario (login) en lugar de la contraseña directa
+        holder.binding.iutvUsuario.text = "Usuario: ${usuarioActual.usuario}"
 
         // Clic en la papelera de usuarios
         holder.binding.btnBorrarUsuario.setOnClickListener {

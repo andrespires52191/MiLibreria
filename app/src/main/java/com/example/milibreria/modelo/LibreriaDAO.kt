@@ -1,5 +1,3 @@
-/* TODO : Revisar "usuario_id" */
-
 package com.example.milibreria.modelo
 
 import androidx.room.Dao
@@ -42,7 +40,10 @@ interface LibreriaDAO {
     @Query("SELECT * FROM usuario WHERE nombre = :nombre LIMIT 1")
     fun buscarUsuarioPorNombre(nombre: String): Usuario?
 
-    @Query("SELECT * FROM usuario WHERE nombre = :usuario AND contrasenia = :contrasenia")
+    @Query(
+        "SELECT * FROM usuario WHERE usuario = :usuario AND contrasenia = :contrasenia " +
+                "AND admin = 1"
+    )
     fun autenticar(usuario: String, contrasenia: String): Flow<Usuario?>
 
     @Delete

@@ -16,12 +16,14 @@
             android:id="@+id/tvLabelNombreUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nombre_usuario"
+            android:labelFor="@id/etUsuarioNombre"
+            android:text="Nombre"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
 
         <EditText
             android:id="@+id/etUsuarioNombre"
@@ -29,25 +31,153 @@
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input_border"
-            android:hint="@string/ejemplo_nombre_usuario"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName|textCapWords"
+            android:importantForAccessibility="yes"
+            android:inputType="textPersonName"
             android:paddingHorizontal="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLabelNombreUsuario" />
+            app:layout_constraintTop_toBottomOf="@id/tvLabelNombreUsuario"
+            tools:ignore="Autofill,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvLabelApellido1Usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:labelFor="@id/etUsuarioApellido1"
+            android:text="Primer Apellido"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etUsuarioNombre"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/etUsuarioApellido1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_border"
+            android:importantForAccessibility="yes"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelApellido1Usuario"
+            tools:ignore="Autofill,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvLabelApellido2Usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:labelFor="@id/etUsuarioApellido2"
+            android:text="Segundo Apellido"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etUsuarioApellido1"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/etUsuarioApellido2"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_border"
+            android:importantForAccessibility="yes"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelApellido2Usuario"
+            tools:ignore="Autofill,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvLabelTelefonoUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:labelFor="@id/etUsuarioTelefono"
+            android:text="Teléfono"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etUsuarioApellido2"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/etUsuarioTelefono"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_border"
+            android:importantForAccessibility="yes"
+            android:inputType="phone"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelTelefonoUsuario"
+            tools:ignore="Autofill,SpeakableTextPresentCheck" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/swUsuarioAdmin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="¿Es Administrador?"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etUsuarioTelefono"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tvLabelNickUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:labelFor="@id/etUsuarioNick"
+            android:text="Nombre de Usuario (Login)"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/swUsuarioAdmin"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/etUsuarioNick"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_border"
+            android:importantForAccessibility="yes"
+            android:inputType="text"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelNickUsuario"
+            tools:ignore="Autofill,SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/tvLabelPasswordUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/contrasena_acceso"
+            android:labelFor="@id/etUsuarioPassword"
+            android:text="Contraseña"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etUsuarioNombre" />
+            app:layout_constraintTop_toBottomOf="@id/etUsuarioNick"
+            tools:ignore="HardcodedText" />
 
         <EditText
             android:id="@+id/etUsuarioPassword"
@@ -55,13 +185,13 @@
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_input_border"
-            android:hint="@string/contrasena_acceso_hint"
-            android:importantForAutofill="no"
+            android:importantForAccessibility="yes"
             android:inputType="textPassword"
             android:paddingHorizontal="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLabelPasswordUsuario" />
+            app:layout_constraintTop_toBottomOf="@id/tvLabelPasswordUsuario"
+            tools:ignore="Autofill,SpeakableTextPresentCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelarUsuario"

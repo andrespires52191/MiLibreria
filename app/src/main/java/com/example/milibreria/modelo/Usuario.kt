@@ -7,10 +7,13 @@ import androidx.room.PrimaryKey
 class Usuario(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
     var nombre: String,
-    var contrasenia: String,
-) {
-}
-
+    var apellido1: String,
+    var apellido2: String,
+    var telefono: String,
+    var admin: Boolean = false, // Por defecto es un usuario lector normal
+    var usuario: String,
+    var contrasenia: String
+)
 
 
 /* Prueba de relación N:M entre Usuario y Libro */

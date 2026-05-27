@@ -66,7 +66,15 @@ class VerUsuarioFragment : Fragment() {
                 val usuario = listaUsuarios?.getOrNull(posicion)
                 usuario?.let {
                     binding.etVerUsuarioNombre.setText(it.nombre)
+                    binding.etVerUsuarioApellido1.setText(it.apellido1)
+                    binding.etVerUsuarioApellido2.setText(it.apellido2)
+                    binding.etVerUsuarioTelefono.setText(it.telefono)
+                    binding.etVerUsuarioAdmin.setText(if (it.admin) "SÍ (Bibliotecario)" else "NO (Lector)")
+                    binding.etVerUsuarioNick.setText(it.usuario)
                     binding.etVerUsuarioPassword.setText(it.contrasenia)
+
+                    // Poner la contraseña con puntitos
+                    binding.etVerUsuarioPassword.transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
                 }
             }
         }

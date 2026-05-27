@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.first
 
 @Database(
     entities = [Usuario::class, Libro::class, Prestamo::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class LibreriaBBDD : RoomDatabase() {
@@ -50,14 +50,23 @@ abstract class LibreriaBBDD : RoomDatabase() {
 
                 val viewModelScope = CoroutineScope(Dispatchers.IO)
                 viewModelScope.launch {
-                    // Insertar usuario y obtener su ID a través de la consulta de autenticación
-                    val usuario = Usuario(0, "abcd", "1234")
-                    INSTANCE?.libreriaDAO?.insertarUsuario(usuario)
+                    // Insertar el usuario inicial con todos sus campos y admin = true
+                    val usuarioAdmin = Usuario(
+                        id = 0,
+                        nombre = "Admin",
+                        apellido1 = "Biblioteca",
+                        apellido2 = "Principal",
+                        telefono = "600000000",
+                        admin = true, // Es admin; puede loguearse
+                        usuario = "abcd",
+                        contrasenia = "1234"
+                    )
+                    INSTANCE?.libreriaDAO?.insertarUsuario(usuarioAdmin)
 
-                    // Autenticar devuelve un "Flow<Usuario?>", obtener el primer valor
+                    // Autenticar usando el campo 'usuario'
                     val usuarioInsertado = INSTANCE
                         ?.libreriaDAO
-                        ?.autenticar(usuario.nombre, usuario.contrasenia)
+                        ?.autenticar(usuarioAdmin.usuario, usuarioAdmin.contrasenia)
                         ?.first()
 
                     val userId = usuarioInsertado?.id ?: 0

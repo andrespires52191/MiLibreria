@@ -167,7 +167,7 @@ class AnadirPrestamoFragment : Fragment() {
             return
         }
 
-        // Obtenemos los IDs reales correspondientes a los elementos seleccionados en los Spinners
+        // Obtener los IDs reales correspondientes a los elementos seleccionados en los Spinners
         val libroSeleccionado = listaLibrosDisponibles[binding.spinnerLibros.selectedItemPosition]
         val usuarioSeleccionado = listaUsuariosDisponibles[binding.spinnerUsuarios.selectedItemPosition]
 

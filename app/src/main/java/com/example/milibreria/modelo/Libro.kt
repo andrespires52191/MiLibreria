@@ -14,7 +14,6 @@ class Libro(
 )
 
 
-
 /* Prueba de relación N:M entre Usuario y Libro */
 
 /*
