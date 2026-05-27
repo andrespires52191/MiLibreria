@@ -10,10 +10,8 @@ class Libro(
     var autor: String?,
     var isbn: String?,
     var publicacion: Int?,
-    var valoracion: Double?,
     var usuario_id: Int // FK Usuario (relaciones/UsuarioWithLibros)
-) {
-}
+)
 
 
 

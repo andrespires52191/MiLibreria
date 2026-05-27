@@ -48,12 +48,10 @@ class VerLibroFragment : Fragment() {
                         editar()
                         true
                     }
-
                     R.id.action_volver -> {
                         volver()
                         true
                     }
-
                     else -> false
                 }
             }
@@ -68,17 +66,11 @@ class VerLibroFragment : Fragment() {
                 binding.etVerAutor.setText(it.autor)
                 binding.etVerIsbn.setText(it.isbn)
                 binding.etVerPublicacion.setText(it.publicacion?.toString() ?: "")
-                binding.etVerValoracion.setText(it.valoracion?.toString() ?: "")
             }
         }
 
-        binding.btnVolverLibro.setOnClickListener {
-            volver()
-        }
-
-        binding.btnEditarLibro.setOnClickListener {
-            editar()
-        }
+        binding.btnVolverLibro.setOnClickListener { volver() }
+        binding.btnEditarLibro.setOnClickListener { editar() }
     }
 
     private fun editar() {

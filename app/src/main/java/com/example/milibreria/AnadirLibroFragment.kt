@@ -25,7 +25,6 @@ class AnadirLibroFragment : Fragment() {
 
     // Acceder al mismo ViewModel que comparte la MainActivity
     private val miViewModel: VM by activityViewModels()
-
     private var posicion: Int = -1
     private lateinit var libro: Libro
 
@@ -53,12 +52,10 @@ class AnadirLibroFragment : Fragment() {
                         guardarLibro()
                         true
                     }
-
                     R.id.action_cancelar -> {
                         cancelar()
                         true
                     }
-
                     else -> false
                 }
             }
@@ -75,7 +72,6 @@ class AnadirLibroFragment : Fragment() {
                 autor = null,
                 isbn = null,
                 publicacion = null,
-                valoracion = null,
                 usuario_id = miViewModel.usuarioActual.value!!.id
             )
         }
@@ -85,17 +81,9 @@ class AnadirLibroFragment : Fragment() {
         binding.etDetalleAutor.setText(libro.autor)
         binding.etDetalleIsbn.setText(libro.isbn)
         binding.etDetallePublicacion.setText(libro.publicacion?.toString() ?: "")
-        binding.etDetalleValoracion.setText(libro.valoracion?.toString() ?: "")
 
-        // Botón Cancelar
-        binding.btnCancelar.setOnClickListener {
-            cancelar()
-        }
-
-        // Botón Guardar
-        binding.btnGuardar.setOnClickListener {
-            guardarLibro()
-        }
+        binding.btnCancelar.setOnClickListener { cancelar() }
+        binding.btnGuardar.setOnClickListener { guardarLibro() }
     }
 
     private fun guardarLibro() {
@@ -113,7 +101,6 @@ class AnadirLibroFragment : Fragment() {
 
         // Conversión directa a Int del año tecleado por el usuario
         libro.publicacion = binding.etDetallePublicacion.text.toString().toIntOrNull()
-        libro.valoracion = binding.etDetalleValoracion.text.toString().toDoubleOrNull()
 
         if (posicion != -1) {
             // Modo Edición: Modifica el libro existente en la base de datos

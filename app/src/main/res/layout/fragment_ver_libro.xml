@@ -107,30 +107,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLabelPublicacion" />
 
-        <TextView
-            android:id="@+id/tvLabelValoracion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/valoracion"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etVerPublicacion" />
-
-        <TextView
-            android:id="@+id/etVerValoracion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            android:paddingVertical="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvLabelValoracion" />
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnVolverLibro"
             android:layout_width="0dp"
@@ -144,7 +120,7 @@
             app:cornerRadius="28dp"
             app:layout_constraintEnd_toStartOf="@id/btnEditarLibro"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etVerValoracion" />
+            app:layout_constraintTop_toBottomOf="@id/etVerPublicacion" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEditarLibro"
@@ -162,4 +138,3 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
-

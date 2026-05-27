@@ -11,13 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.first
 
-
 @Database(
-    entities = [
-        Usuario::class,
-        Libro::class,
-        Prestamo::class
-    ],
+    entities = [Usuario::class, Libro::class, Prestamo::class],
     version = 2,
     exportSchema = false
 )
@@ -55,12 +50,11 @@ abstract class LibreriaBBDD : RoomDatabase() {
 
                 val viewModelScope = CoroutineScope(Dispatchers.IO)
                 viewModelScope.launch {
-                    // insertar usuario y obtener su id a través de la consulta de autenticación
+                    // Insertar usuario y obtener su ID a través de la consulta de autenticación
                     val usuario = Usuario(0, "abcd", "1234")
-
                     INSTANCE?.libreriaDAO?.insertarUsuario(usuario)
 
-                    // autenticar devuelve un Flow<Usuario?>, obtener el primer valor
+                    // Autenticar devuelve un "Flow<Usuario?>", obtener el primer valor
                     val usuarioInsertado = INSTANCE
                         ?.libreriaDAO
                         ?.autenticar(usuario.nombre, usuario.contrasenia)
@@ -74,7 +68,6 @@ abstract class LibreriaBBDD : RoomDatabase() {
                             autor = "Miguel de Cervantes",
                             isbn = "9788424116286",
                             publicacion = 1605,
-                            valoracion = 5.0,
                             usuario_id = userId
                         ),
                         Libro(
@@ -82,7 +75,6 @@ abstract class LibreriaBBDD : RoomDatabase() {
                             autor = "Gabriel García Márquez",
                             isbn = "9780307474728",
                             publicacion = 1967,
-                            valoracion = 4.8,
                             usuario_id = userId
                         ),
                         Libro(
@@ -90,7 +82,6 @@ abstract class LibreriaBBDD : RoomDatabase() {
                             autor = "Antoine de Saint-Exupéry",
                             isbn = "9780156013925",
                             publicacion = 1943,
-                            valoracion = 4.9,
                             usuario_id = userId
                         ),
                     )
